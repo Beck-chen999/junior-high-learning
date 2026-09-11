@@ -246,6 +246,21 @@ Number(selected.value)===q.answer
 ){
 score++;
 }
+else{
+
+wrongQuestions.push({
+
+question:q.question,
+
+correct:
+q.options[q.answer],
+
+explanation:
+q.explanation
+
+});
+
+}
 
 });
 
