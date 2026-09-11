@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>錯題本</title>
+
+<style>
+
+body{
+font-family:"Microsoft JhengHei";
+background:#f5f5f5;
+margin:0;
+}
+
+header{
+background:#e53935;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:10px;
+box-shadow:0 2px 4px rgba(0,0,0,.1);
+}
+
+.empty{
+text-align:center;
+font-size:24px;
+color:#777;
+}
+
+.question{
+background:#fff3f3;
+padding:15px;
+margin-bottom:15px;
+border-left:5px solid red;
+border-radius:8px;
+}
+
+.answer{
+color:green;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>❌ 我的錯題本</h1>
+
+<p>
+
+顯示最近一次測驗答錯題目
+
+</p>
+
+</header>
+
+<div class="container">
+
+<div id="wrongbook"></div>
+
+</div>
+
+<script>
+
+const wrongQuestions =
+
+JSON.parse(
+localStorage.getItem("wrongbook")
+) || [];
+
+const container =
+
+document.getElementById(
+"wrongbook"
+);
+
+if(
+wrongQuestions.length===0
+){
+
+container.innerHTML =
+
+`
+<div class="card empty">
+
+🎉 目前沒有錯題
+
+<br><br>
+
+請先完成模擬考
+
+</div>
+`;
+
+}else{
+
+let html="";
+
+wrongQuestions.forEach(
+
+(item,index)=>{
+
+html +=
+
+`
+<div class="question">
+
+<h3>
+
+第 ${index+1} 題
+
+</h3>
+
+<p>
+
+${item.question}
+
+</p>
+
+<p class="answer">
+
+✅ 正確答案：
+
+${item.correct}
+
+</p>
+
+<p>
+
+📖 解析：
+
+${item.explanation}
+
+</p>
+
+</div>
+`;
+
+});
+
+container.innerHTML = html;
+
+}
+
+</script>
+
+</body>
+
+</html>
