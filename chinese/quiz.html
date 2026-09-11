@@ -2,7 +2,6 @@
 <html lang="zh-Hant">
 
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -19,8 +18,8 @@ margin:0;
 header{
 background:#1976d2;
 color:white;
-text-align:center;
 padding:20px;
+text-align:center;
 }
 
 .container{
@@ -32,7 +31,7 @@ padding:20px;
 .question{
 background:white;
 padding:20px;
-margin-bottom:20px;
+margin-bottom:15px;
 border-radius:10px;
 box-shadow:0 2px 4px rgba(0,0,0,.1);
 }
@@ -40,30 +39,22 @@ box-shadow:0 2px 4px rgba(0,0,0,.1);
 button{
 background:#1976d2;
 color:white;
+padding:12px 25px;
 border:none;
-padding:12px 20px;
 border-radius:6px;
 cursor:pointer;
+font-size:16px;
 }
 
 button:hover{
-background:#1565c0;
+background:#125ea8;
 }
 
 #result{
 margin-top:20px;
-padding:20px;
 font-size:24px;
 font-weight:bold;
 text-align:center;
-}
-
-.correct{
-color:green;
-}
-
-.wrong{
-color:red;
 }
 
 </style>
@@ -76,153 +67,17 @@ color:red;
 
 <h1>📝 第一次段考模擬考</h1>
 
-<p>
-目前版本 V1
-</p>
+<p>翰林國文八上</p>
 
 </header>
 
 <div class="container">
 
-<form id="quizForm">
+<div id="quiz"></div>
 
-<div class="question">
-
-<h3>1. 田園之秋選中，大自然被比喻成什麼？</h3>
-
-<label>
-<input type="radio" name="q1" value="A">
-電影
-</label><br>
-
-<label>
-<input type="radio" name="q1" value="B">
-戲劇
-</label><br>
-
-<label>
-<input type="radio" name="q1" value="C">
-小說
-</label><br>
-
-<label>
-<input type="radio" name="q1" value="D">
-童話
-</label>
-
-</div>
-
-<div class="question">
-
-<h3>2. 「纖纖擢素手」中的「擢」意思是？</h3>
-
-<label>
-<input type="radio" name="q2" value="A">
-放下
-</label><br>
-
-<label>
-<input type="radio" name="q2" value="B">
-拿走
-</label><br>
-
-<label>
-<input type="radio" name="q2" value="C">
-舉起
-</label><br>
-
-<label>
-<input type="radio" name="q2" value="D">
-觀看
-</label>
-
-</div>
-
-<div class="question">
-
-<h3>3. 下雨天，真好的作者是誰？</h3>
-
-<label>
-<input type="radio" name="q3" value="A">
-琦君
-</label><br>
-
-<label>
-<input type="radio" name="q3" value="B">
-余光中
-</label><br>
-
-<label>
-<input type="radio" name="q3" value="C">
-張曉風
-</label><br>
-
-<label>
-<input type="radio" name="q3" value="D">
-徐志摩
-</label>
-
-</div>
-
-<div class="question">
-
-<h3>4. 下列何者屬於聯綿詞？</h3>
-
-<label>
-<input type="radio" name="q4" value="A">
-老師
-</label><br>
-
-<label>
-<input type="radio" name="q4" value="B">
-葡萄
-</label><br>
-
-<label>
-<input type="radio" name="q4" value="C">
-跑步
-</label><br>
-
-<label>
-<input type="radio" name="q4" value="D">
-教室
-</label>
-
-</div>
-
-<div class="question">
-
-<h3>5. 古詩十九首屬於？</h3>
-
-<label>
-<input type="radio" name="q5" value="A">
-五言古詩
-</label><br>
-
-<label>
-<input type="radio" name="q5" value="B">
-七言律詩
-</label><br>
-
-<label>
-<input type="radio" name="q5" value="C">
-詞
-</label><br>
-
-<label>
-<input type="radio" name="q5" value="D">
-曲
-</label>
-
-</div>
-
-<button type="button" onclick="checkAnswer()">
-
-提交測驗
-
+<button onclick="checkAnswer()">
+提交答案
 </button>
-
-</form>
 
 <div id="result"></div>
 
@@ -230,45 +85,184 @@ color:red;
 
 <script>
 
+// 題庫
+
+const questionBank = [
+
+{
+question:"田園之秋選中，大自然被比喻成什麼？",
+options:["電影","戲劇","小說","童話"],
+answer:1
+},
+
+{
+question:"田園之秋選中，大西北雨的順序為何？",
+options:[
+"烏雲→雷電→大雨→天晴",
+"大雨→雷電→烏雲→天晴",
+"雷電→大雨→天晴→烏雲",
+"天晴→烏雲→雷電→大雨"
+],
+answer:0
+},
+
+{
+question:"「纖纖擢素手」中的擢是什麼意思？",
+options:["觀看","奔跑","舉起","放下"],
+answer:2
+},
+
+{
+question:"古詩十九首屬於哪類詩？",
+options:["五言古詩","七言律詩","詞","曲"],
+answer:0
+},
+
+{
+question:"下雨天，真好的作者是誰？",
+options:["琦君","余光中","張曉風","席慕蓉"],
+answer:0
+},
+
+{
+question:"下雨天，真好一文主要表達什麼？",
+options:["戰爭","思鄉與童年回憶","科學知識","歷史故事"],
+answer:1
+},
+
+{
+question:"下列何者屬於聯綿詞？",
+options:["老師","葡萄","教室","學生"],
+answer:1
+},
+
+{
+question:"「美麗」屬於哪種詞類？",
+options:["名詞","動詞","形容詞","副詞"],
+answer:2
+},
+
+{
+question:"「非常」屬於哪種詞類？",
+options:["副詞","名詞","動詞","代名詞"],
+answer:0
+},
+
+{
+question:"田園之秋選最常出現的修辭之一？",
+options:["借代","映襯","摹寫","引用"],
+answer:2
+}
+
+];
+
+// 打亂題目
+
+function shuffle(array){
+
+for(let i=array.length-1;i>0;i--){
+
+let j=Math.floor(Math.random()*(i+1));
+
+[array[i],array[j]]
+=
+[array[j],array[i]];
+
+}
+
+return array;
+
+}
+
+// 抽題
+
+const examQuestions =
+shuffle([...questionBank]).slice(0,5);
+
+// 顯示題目
+
+const quizDiv =
+document.getElementById("quiz");
+
+examQuestions.forEach((q,index)=>{
+
+let html=`
+
+<div class="question">
+
+<h3>
+
+${index+1}. ${q.question}
+
+</h3>
+
+`;
+
+q.options.forEach((option,i)=>{
+
+html += `
+
+<label>
+
+<input
+type="radio"
+name="q${index}"
+value="${i}">
+
+${option}
+
+</label>
+
+<br><br>
+
+`;
+
+});
+
+html += "</div>";
+
+quizDiv.innerHTML += html;
+
+});
+
+// 批改
+
 function checkAnswer(){
 
-let score = 0;
+let score=0;
 
-const answers = {
+examQuestions.forEach((q,index)=>{
 
-q1:"B",
-q2:"C",
-q3:"A",
-q4:"B",
-q5:"A"
+let selected = document.querySelector(
 
-};
+`input[name="q${index}"]:checked`
 
-for(let key in answers){
-
-let selected =
-document.querySelector(
-`input[name="${key}"]:checked`
 );
 
 if(
 selected &&
-selected.value === answers[key]
+Number(selected.value)===q.answer
 ){
 score++;
 }
 
-}
+});
 
 let percent =
-Math.round(score/5*100);
+Math.round(
+score/examQuestions.length*100
+);
 
-document.getElementById("result").innerHTML=
+document.getElementById("result").innerHTML =
 
 `
-✅ 得分：
+🎯 得分：
 
-${score} / 5
+${score}
+
+/
+
+${examQuestions.length}
 
 <br><br>
 
@@ -283,51 +277,9 @@ percent
 );
 
 }
-function shuffle(array){
-2
- 
-3
-for(
-4
-let i=array.length-1;
-5
-i>0;
-6
-i--
-7
-){
-8
- 
-9
-const j=Math.floor(
-10
-Math.random()*(i+1)
-11
-);
-12
- 
-13
-[array[i],array[j]]
-14
-=
-15
-[array[j],array[i]];
-16
-}
-17
- 
-18
-return array;
-19
- 
-20
-}
-21
+
 </script>
 
 </body>
 
 </html>
-const examQuestions =
-shuffle(questionBank)
-.slice(0,50);
