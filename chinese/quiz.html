@@ -1,29 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>第一次段考模擬考</title>
+
+<style>
+
+body{
+font-family:"Microsoft JhengHei",sans-serif;
+background:#f5f6f8;
+margin:0;
+}
+
+header{
+background:#1976d2;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+.question{
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:10px;
+box-shadow:0 2px 4px rgba(0,0,0,.1);
+}
+
+button{
+background:#1976d2;
+color:white;
+border:none;
+padding:12px 24px;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#125ea8;
+}
+
+#result{
+margin-top:20px;
+}
+
+.analysis{
+background:#fff3f3;
+padding:15px;
+margin-bottom:15px;
+border-left:5px solid #e53935;
+border-radius:8px;
+}
+
+.good{
+background:#e8f5e9;
+padding:20px;
+border-radius:8px;
+text-align:center;
+}
+
+.warning{
+background:#fff3cd;
+padding:20px;
+border-radius:8px;
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📝 第一次段考模擬考</h1>
+
+<p>翰林國文八上</p>
+
+</header>
+
+<div class="container">
+
+<div id="quiz"></div>
+
+<button onclick="checkAnswer()">
+提交答案
+</button>
+
+<div id="result"></div>
+
+</div>
+
+<!-- 題庫 -->
 <script src="questions.js"></script>
 
 <script>
 
-// ======================
-// 如果 questions.js 未載入
-// 使用本地題庫
-// ======================
+// =================================
+// 題庫檢查
+// =================================
 
-if(typeof questionBank === "undefined"){
+if(
+typeof questionBank === "undefined" ||
+!Array.isArray(questionBank) ||
+questionBank.length === 0
+){
 
-const questionBank = [];
+document.getElementById("quiz").innerHTML =
+
+`
+<div class="warning">
+
+<h2>⚠️ 題庫尚未載入</h2>
+
+<p>
+請確認 questions.js 已建立
+並且內含 questionBank 陣列
+</p>
+
+</div>
+`;
+
+throw new Error("questions.js 未載入");
 
 }
 
-// ======================
-// 洗牌
-// ======================
+// =================================
+// 洗牌函式
+// =================================
 
 function shuffle(array){
 
-for(let i=array.length-1;i>0;i--){
+for(
+let i=array.length-1;
+i>0;
+i--
+){
 
-let j=Math.floor(Math.random()*(i+1));
+const j=Math.floor(
+Math.random()*(i+1)
+);
 
-[array[i],array[j]]=
+[array[i],array[j]]
+=
 [array[j],array[i]];
 
 }
@@ -32,21 +163,30 @@ return array;
 
 }
 
-// ======================
+// =================================
 // 抽題
-// ======================
+// =================================
 
 const QUESTION_COUNT =
-Math.min(50,questionBank.length);
+Math.min(
+50,
+questionBank.length
+);
 
 const examQuestions =
-shuffle([...questionBank])
-.slice(0,QUESTION_COUNT);
 
+shuffle(
+[...questionBank]
+)
 
-// ======================
+.slice(
+0,
+QUESTION_COUNT
+);
+
+// =================================
 // 顯示題目
-// ======================
+// =================================
 
 const quizDiv =
 document.getElementById("quiz");
@@ -87,16 +227,19 @@ ${option}
 
 });
 
-html += "</div>";
+html +=
+
+`
+</div>
+`;
 
 quizDiv.innerHTML += html;
 
 });
 
-
-// ======================
+// =================================
 // 批改
-// ======================
+// =================================
 
 function checkAnswer(){
 
@@ -106,29 +249,36 @@ let wrongQuestions = [];
 
 examQuestions.forEach((q,index)=>{
 
-let selected =
+const selected =
+
 document.querySelector(
 `input[name="q${index}"]:checked`
 );
 
 if(
 selected &&
-Number(selected.value) === q.answer
+Number(selected.value)===q.answer
 ){
 
 score++;
 
-}else{
+}
+else{
 
 wrongQuestions.push({
 
-question:q.question,
+lesson:
+q.lesson || "未分類",
+
+question:
+q.question,
 
 correct:
 q.options[q.answer],
 
 explanation:
-q.explanation || "請複習本單元重點"
+q.explanation ||
+"請複習本單元"
 
 });
 
@@ -136,12 +286,13 @@ q.explanation || "請複習本單元重點"
 
 });
 
+// =================================
+// 成績
+// =================================
 
-// ======================
-// 計算分數
-// ======================
+const percent =
 
-let percent = Math.round(
+Math.round(
 
 score /
 examQuestions.length
@@ -149,14 +300,15 @@ examQuestions.length
 
 );
 
-
-// ======================
+// =================================
 // 顯示結果
-// ======================
+// =================================
 
 let resultHtml =
 
 `
+<div class="good">
+
 <h2>
 
 🎯 得分
@@ -176,20 +328,15 @@ ${examQuestions.length}
 ${percent} 分
 
 </h2>
+
+</div>
 `;
-
-
-// ======================
-// 顯示錯題
-// ======================
 
 if(wrongQuestions.length>0){
 
 resultHtml +=
 
 `
-<hr>
-
 <h2>
 
 ❌ 錯題解析
@@ -197,19 +344,19 @@ resultHtml +=
 </h2>
 `;
 
-wrongQuestions.forEach((item,index)=>{
+wrongQuestions.forEach(
+
+(item,index)=>{
 
 resultHtml +=
 
 `
-<div style="text-align:left;
-margin-bottom:20px;
-padding:15px;
-background:#fff3f3;
-border-radius:8px;">
+<div class="analysis">
 
 <b>
+
 第 ${index+1} 題
+
 </b>
 
 <br><br>
@@ -222,87 +369,4 @@ ${item.question}
 
 ${item.correct}
 
-<br><br>
-
-📖 解析：
-
-${item.explanation}
-
-</div>
-`;
-
-});
-
-}else{
-
-resultHtml +=
-
-`
-<hr>
-
-<h2>
-
-🎉 全部答對！
-
-</h2>
-`;
-
-}
-
-document.getElementById("result")
-.innerHTML = resultHtml;
-
-
-// ======================
-// 儲存最新成績
-// ======================
-
-localStorage.setItem(
-"chinese_exam1_score",
-percent
-);
-
-
-// ======================
-// 儲存歷史成績
-// ======================
-
-let historyScores =
-
-JSON.parse(
-localStorage.getItem("scoreHistory")
-) || [];
-
-historyScores.push({
-
-date:new Date()
-.toLocaleString(),
-
-score:percent
-
-});
-
-localStorage.setItem(
-
-"scoreHistory",
-
-JSON.stringify(historyScores)
-
-);
-
-
-// ======================
-// 儲存錯題本
-// ======================
-
-localStorage.setItem(
-
-"wrongbook",
-
-JSON.stringify(wrongQuestions)
-
-);
-
-}
-
-</script>
+<br
