@@ -1,4 +1,4 @@
-const questionBank = [
+window.questionBank = [
 
 {
 id:1,
