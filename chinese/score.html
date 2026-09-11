@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>歷史成績</title>
+
+<style>
+
+body{
+font-family:"Microsoft JhengHei";
+background:#f5f5f5;
+margin:0;
+}
+
+header{
+background:#009688;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:10px;
+box-shadow:0 2px 4px rgba(0,0,0,.1);
+}
+
+.stat{
+font-size:22px;
+font-weight:bold;
+margin:10px 0;
+}
+
+.record{
+background:#f8f9fa;
+padding:15px;
+margin-bottom:10px;
+border-left:5px solid #009688;
+border-radius:6px;
+}
+
+button{
+background:#e53935;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#c62828;
+}
+
+.empty{
+text-align:center;
+font-size:22px;
+color:#666;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📊 歷史成績紀錄</h1>
+
+<p>翰林國文八上練習紀錄</p>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>成績統計</h2>
+
+<div id="summary"></div>
+
+</div>
+
+<div class="card">
+
+<h2>歷史紀錄</h2>
+
+<div id="history"></div>
+
+</div>
+
+<div class="card">
+
+<button onclick="clearScores()">
+
+🗑 清除所有紀錄
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+// 讀取歷史成績
+
+const scores =
+
+JSON.parse(
+localStorage.getItem("scoreHistory")
+) || [];
+
+const summaryDiv =
+document.getElementById("summary");
+
+const historyDiv =
+document.getElementById("history");
+
+if(scores.length===0){
+
+summaryDiv.innerHTML=
+`
+<div class="empty">
+
+尚無測驗紀錄
+
+</div>
+`;
+
+historyDiv.innerHTML=
+`
+<div class="empty">
+
+請先完成模擬考
+
+</div>
+`;
+
+}
+else{
+
+const latest =
+scores[scores.length-1].score;
+
+const highest =
+Math.max(
+...scores.map(
+s=>s.score
+)
+);
+
+const average =
+(
+scores.reduce(
+(a,b)=>a+b.score,
+0
+)
+/
+scores.length
+).toFixed(1);
+
+summaryDiv.innerHTML=
+
+`
+<div class="stat">
+
+最新成績：
+${latest}
