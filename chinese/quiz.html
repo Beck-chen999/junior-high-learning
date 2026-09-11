@@ -254,21 +254,13 @@ score/examQuestions.length*100
 );
 
 document.getElementById("result").innerHTML =
-
-`
-🎯 得分：
-
-${score}
-
-/
-
-${examQuestions.length}
-
-<br><br>
-
-📊 成績：
-
-${percent} 分
+"🎯 得分：" +
+score +
+" / " +
+examQuestions.length +
+"<br><br>📊 成績：" +
+percent +
+" 分";
 `;
 
 localStorage.setItem(
