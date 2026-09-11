@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>第一次段考模擬考</title>
+
+<style>
+
+body{
+font-family:"Microsoft JhengHei";
+background:#f5f5f5;
+margin:0;
+}
+
+header{
+background:#1976d2;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+.question{
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:10px;
+box-shadow:0 2px 4px rgba(0,0,0,.1);
+}
+
+button{
+background:#1976d2;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1565c0;
+}
+
+#result{
+margin-top:20px;
+padding:20px;
+font-size:24px;
+font-weight:bold;
+text-align:center;
+}
+
+.correct{
+color:green;
+}
+
+.wrong{
+color:red;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📝 第一次段考模擬考</h1>
+
+<p>
+目前版本 V1
+</p>
+
+</header>
+
+<div class="container">
+
+<form id="quizForm">
+
+<div class="question">
+
+<h3>1. 田園之秋選中，大自然被比喻成什麼？</h3>
+
+<label>
+<input type="radio" name="q1" value="A">
+電影
+</label><br>
+
+<label>
+<input type="radio" name="q1" value="B">
+戲劇
+</label><br>
+
+<label>
+<input type="radio" name="q1" value="C">
+小說
+</label><br>
+
+<label>
+<input type="radio" name="q1" value="D">
+童話
+</label>
+
+</div>
+
+<div class="question">
+
+<h3>2. 「纖纖擢素手」中的「擢」意思是？</h3>
+
+<label>
+<input type="radio" name="q2" value="A">
+放下
+</label><br>
+
+<label>
+<input type="radio" name="q2" value="B">
+拿走
+</label><br>
+
+<label>
+<input type="radio" name="q2" value="C">
+舉起
+</label><br>
+
+<label>
+<input type="radio" name="q2" value="D">
+觀看
+</label>
+
+</div>
+
+<div class="question">
+
+<h3>3. 下雨天，真好的作者是誰？</h3>
+
+<label>
+<input type="radio" name="q3" value="A">
+琦君
+</label><br>
+
+<label>
+<input type="radio" name="q3" value="B">
+余光中
+</label><br>
+
+<label>
+<input type="radio" name="q3" value="C">
+張曉風
+</label><br>
+
+<label>
+<input type="radio" name="q3" value="D">
+徐志摩
+</label>
+
+</div>
+
+<div class="question">
+
+<h3>4. 下列何者屬於聯綿詞？</h3>
+
+<label>
+<input type="radio" name="q4" value="A">
+老師
+</label><br>
+
+<label>
+<input type="radio" name="q4" value="B">
+葡萄
+</label><br>
+
+<label>
+<input type="radio" name="q4" value="C">
+跑步
+</label><br>
+
+<label>
+<input type="radio" name="q4" value="D">
+教室
+</label>
+
+</div>
+
+<div class="question">
+
+<h3>5. 古詩十九首屬於？</h3>
+
+<label>
+<input type="radio" name="q5" value="A">
+五言古詩
+</label><br>
+
+<label>
+<input type="radio" name="q5" value="B">
+七言律詩
+</label><br>
+
+<label>
+<input type="radio" name="q5" value="C">
+詞
+</label><br>
+
+<label>
+<input type="radio" name="q5" value="D">
+曲
+</label>
+
+</div>
+
+<button type="button" onclick="checkAnswer()">
+
+提交測驗
+
+</button>
+
+</form>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function checkAnswer(){
+
+let score = 0;
+
+const answers = {
+
+q1:"B",
+q2:"C",
+q3:"A",
+q4:"B",
+q5:"A"
+
+};
+
+for(let key in answers){
+
+let selected =
+document.querySelector(
+`input[name="${key}"]:checked`
+);
+
+if(
+selected &&
+selected.value === answers[key]
+){
+score++;
+}
+
+}
+
+let percent =
+Math.round(score/5*100);
+
+document.getElementById("result").innerHTML=
+
+`
+✅ 得分：
+
+${score} / 5
+
+<br><br>
+
+📊 成績：
+
+${percent} 分
+`;
+
+localStorage.setItem(
+"chinese_exam1_score",
+percent
+);
+
+}
+
+</script>
+
+</body>
+
+</html>
