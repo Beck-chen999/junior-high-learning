@@ -553,6 +553,337 @@ class="lesson-quiz-button retry-button"
 
     updateProgress();
   </script>
+  <!-- 載入共用題庫 -->
+  ./questions.jsscript>
 
+  <!-- 第一課小測驗程式 -->
+  <script>
+    const CURRENT_LESSON = "田園之秋選";
+    const LESSON_QUESTION_COUNT = 10;
+
+    let lessonQuestions = [];
+    let lessonQuizSubmitted = false;
+
+    function shuffleLessonQuestions(array) {
+      const copiedArray = array.slice();
+
+      for (let i = copiedArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [copiedArray[i], copiedArray[j]] =
+          [copiedArray[j], copiedArray[i]];
+      }
+
+      return copiedArray;
+    }
+
+    function loadLessonQuiz() {
+      const quizContainer =
+        document.getElementById("lessonQuiz");
+
+      const resultContainer =
+        document.getElementById("lessonQuizResult");
+
+      const submitButton =
+        document.getElementById("lessonSubmitButton");
+
+      if (!quizContainer || !resultContainer || !submitButton) {
+        console.error("找不到第一課小測驗的顯示區或按鈕。");
+        return;
+      }
+
+      resultContainer.innerHTML = "";
+      lessonQuizSubmitted = false;
+
+      if (
+        !window.questionBank ||
+        !Array.isArray(window.questionBank)
+      ) {
+        quizContainer.innerHTML =
+          '<div class="important">' +
+          '<strong>題庫載入失敗。</strong><br>' +
+          '請確認 questions.js 與 lesson1.html 位於同一個 chinese 資料夾。' +
+          '</div>';
+
+        submitButton.disabled = true;
+        return;
+      }
+
+      const filteredQuestions =
+        window.questionBank.filter(function (question) {
+          return question.lesson === CURRENT_LESSON;
+        });
+
+      if (filteredQuestions.length === 0) {
+        quizContainer.innerHTML =
+          '<div class="important">' +
+          '找不到「' + CURRENT_LESSON + '」的題目。' +
+          '<br>請檢查 questions.js 中的 lesson 名稱。' +
+          '</div>';
+
+        submitButton.disabled = true;
+        return;
+      }
+
+      lessonQuestions =
+        shuffleLessonQuestions(filteredQuestions).slice(
+          0,
+          Math.min(
+            LESSON_QUESTION_COUNT,
+            filteredQuestions.length
+          )
+        );
+
+      quizContainer.innerHTML = "";
+
+      lessonQuestions.forEach(function (
+        question,
+        questionIndex
+      ) {
+        const questionBlock =
+          document.createElement("div");
+
+        questionBlock.className =
+          "lesson-quiz-question";
+
+        questionBlock.id =
+          "lesson-question-" + questionIndex;
+
+        const questionTitle =
+          document.createElement("h3");
+
+        questionTitle.textContent =
+          (questionIndex + 1) +
+          ". " +
+          question.question;
+
+        questionBlock.appendChild(questionTitle);
+
+        question.options.forEach(function (
+          option,
+          optionIndex
+        ) {
+          const label =
+            document.createElement("label");
+
+          label.className = "lesson-option";
+
+          const radio =
+            document.createElement("input");
+
+          radio.type = "radio";
+          radio.name =
+            "lesson-q-" + questionIndex;
+
+          radio.value = String(optionIndex);
+
+          const optionText =
+            document.createElement("span");
+
+          optionText.textContent =
+            String.fromCharCode(65 + optionIndex) +
+            ". " +
+            option;
+
+          label.appendChild(radio);
+          label.appendChild(optionText);
+          questionBlock.appendChild(label);
+        });
+
+        quizContainer.appendChild(questionBlock);
+      });
+
+      submitButton.disabled = false;
+      submitButton.textContent = "提交第一課測驗";
+    }
+
+    function checkLessonQuiz() {
+      if (
+        lessonQuizSubmitted ||
+        lessonQuestions.length === 0
+      ) {
+        return;
+      }
+
+      let correctCount = 0;
+      let unansweredCount = 0;
+      const wrongAnswers = [];
+
+      lessonQuestions.forEach(function (
+        question,
+        questionIndex
+      ) {
+        const questionBlock =
+          document.getElementById(
+            "lesson-question-" + questionIndex
+          );
+
+        questionBlock.classList.remove(
+          "lesson-unanswered"
+        );
+
+        const selected =
+          document.querySelector(
+            'input[name="lesson-q-' +
+            questionIndex +
+            '"]:checked'
+          );
+
+        if (!selected) {
+          unansweredCount++;
+
+          questionBlock.classList.add(
+            "lesson-unanswered"
+          );
+        }
+
+        const selectedAnswer =
+          selected ? Number(selected.value) : null;
+
+        if (selectedAnswer === question.answer) {
+          correctCount++;
+        } else {
+          wrongAnswers.push({
+            question: question.question,
+            userAnswer:
+              selectedAnswer === null
+                ? "未作答"
+                : question.options[selectedAnswer],
+            correctAnswer:
+              question.options[question.answer],
+            explanation:
+              question.explanation ||
+              "請重新複習本課相關內容。"
+          });
+        }
+      });
+
+      const score = Math.round(
+        correctCount /
+        lessonQuestions.length *
+        100
+      );
+
+      let resultHtml =
+        '<div class="lesson-result">' +
+        '<h2>第一課測驗結果</h2>' +
+        '<p><strong>答對：</strong>' +
+        correctCount +
+        " / " +
+        lessonQuestions.length +
+        "</p>" +
+        '<p><strong>成績：</strong>' +
+        score +
+        " 分</p>" +
+        '<p><strong>未作答：</strong>' +
+        unansweredCount +
+        " 題</p>" +
+        "</div>";
+
+      if (wrongAnswers.length > 0) {
+        resultHtml += "<h2>錯題解析</h2>";
+
+        wrongAnswers.forEach(function (
+          item,
+          index
+        ) {
+          resultHtml +=
+            '<div class="lesson-wrong-answer">' +
+            "<strong>錯題 " +
+            (index + 1) +
+            "：</strong>" +
+            item.question +
+            "<br><br>" +
+            "<strong>你的答案：</strong>" +
+            item.userAnswer +
+            "<br>" +
+            "<strong>正確答案：</strong>" +
+            item.correctAnswer +
+            "<br>" +
+            "<strong>解析：</strong>" +
+            item.explanation +
+            "</div>";
+        });
+      } else {
+        resultHtml +=
+          '<div class="lesson-result">' +
+          "<h2>🎉 第一課全部答對！</h2>" +
+          "</div>";
+      }
+
+      document.getElementById(
+        "lessonQuizResult"
+      ).innerHTML = resultHtml;
+
+      localStorage.setItem(
+        "lesson1LatestScore",
+        String(score)
+      );
+
+      lessonQuizSubmitted = true;
+
+      const submitButton =
+        document.getElementById(
+          "lessonSubmitButton"
+        );
+
+      submitButton.disabled = true;
+      submitButton.textContent = "已完成批改";
+
+      document.getElementById(
+        "lessonQuizResult"
+      ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+        const submitButton =
+          document.getElementById(
+            "lessonSubmitButton"
+          );
+
+        const retryButton =
+          document.getElementById(
+            "lessonRetryButton"
+          );
+
+        if (submitButton) {
+          submitButton.addEventListener(
+            "click",
+            checkLessonQuiz
+          );
+        }
+
+        if (retryButton) {
+          retryButton.addEventListener(
+            "click",
+            function () {
+              const shouldRestart =
+                window.confirm(
+                  "確定要重新抽取第一課題目嗎？"
+                );
+
+              if (shouldRestart) {
+                loadLessonQuiz();
+
+                document.getElementById(
+                  "lessonQuizSection"
+                ).scrollIntoView({
+                  behavior: "smooth",
+                  block: "start"
+                });
+              }
+            }
+          );
+        }
+
+        loadLessonQuiz();
+      }
+    );
+  </script>
 </body>
 </html>
