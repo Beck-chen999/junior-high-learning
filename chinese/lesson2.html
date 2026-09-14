@@ -2,167 +2,564 @@
 <html lang="zh-Hant">
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>第2課 古詩選</title>
+  <title>第2課 古詩選</title>
 
-<style>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-body{
-font-family:"Microsoft JhengHei";
-background:#f5f5f5;
-margin:0;
-}
+    body {
+      margin: 0;
+      color: #263238;
+      background: #f4f7fb;
+      font-family: "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+      line-height: 1.8;
+    }
 
-header{
-background:#2e7d32;
-color:white;
-padding:20px;
-text-align:center;
-}
+    header {
+      padding: 28px 20px;
+      color: white;
+      text-align: center;
+      background: #2e7d32;
+    }
 
-.container{
-max-width:1000px;
-margin:auto;
-padding:20px;
-}
+    header h1 {
+      margin: 0 0 8px;
+    }
 
-.card{
-background:white;
-padding:20px;
-margin-bottom:20px;
-border-radius:10px;
-box-shadow:0 2px 4px rgba(0,0,0,.1);
-}
+    header p {
+      margin: 0;
+    }
 
-h2{
-color:#2e7d32;
-}
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    }
 
-blockquote{
-background:#f1f8e9;
-padding:15px;
-border-left:5px solid #2e7d32;
-font-size:20px;
-line-height:1.8;
-}
+    nav a {
+      padding: 8px 14px;
+      color: #2e7d32;
+      background: #e8f5e9;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-</style>
+    nav a:hover {
+      background: #c8e6c9;
+    }
 
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      padding: 22px;
+      margin-bottom: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #2e7d32;
+    }
+
+    h3 {
+      color: #37474f;
+    }
+
+    .important {
+      padding: 15px;
+      margin-top: 15px;
+      background: #fff8e1;
+      border-left: 5px solid #ffb300;
+      border-radius: 8px;
+    }
+
+    .poem-flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .poem-flow div {
+      padding: 15px 8px;
+      color: #1b5e20;
+      background: #e8f5e9;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      border: 1px solid #cfd8dc;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #e8f5e9;
+    }
+
+    .check-item {
+      display: block;
+      padding: 11px;
+      margin: 8px 0;
+      background: #f7f9fb;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    .check-item:hover {
+      background: #eef7ef;
+    }
+
+    .check-item input {
+      margin-right: 8px;
+    }
+
+    .progress-bar {
+      height: 20px;
+      overflow: hidden;
+      background: #eceff1;
+      border-radius: 10px;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: #43a047;
+      transition: width 0.3s;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .quiz-link {
+      display: inline-block;
+      padding: 11px 18px;
+      color: white;
+      background: #2e7d32;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .quiz-link:hover {
+      background: #1b5e20;
+    }
+
+    .reset-button {
+      padding: 11px 18px;
+      color: white;
+      background: #607d8b;
+      border: 0;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .reset-button:hover {
+      background: #455a64;
+    }
+
+    @media (max-width: 800px) {
+      .poem-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 12px;
+      }
+
+      .card {
+        padding: 17px;
+      }
+
+      table {
+        font-size: 15px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
+  <header>
+    <h1>🌌 第2課 古詩選</h1>
+    <p>離愁相思、古詩常識與詩句理解</p>
+  </header>
 
-<h1>📖 第2課 古詩選</h1>
+  <nav>
+    <a href="index.html">🏠 國文首頁</a>
+    <a href="lesson1.html">上一課</a>
+    <a href="lesson3.html">下一課</a>
+    exam1.html段考總複習</a>
+    <a href="quiz_v3.html">模擬nav>
 
-<p>牛郎織女的相思故事</p>
+  <main class="container">
 
-</header>
+    <section class="card">
+      <h2>一、本課學習目標</h2>
 
-<div class="container">
+      <ul>
+        <li>理解古詩所傳達的離愁與相思。</li>
+        <li>掌握詩中人物的動作、處境與情緒變化。</li>
+        <li>熟悉重要字詞、疊字及詩句意思。</li>
+        <li>認識《古詩十九首》的基本文學常識。</li>
+        <li>分辨古體詩與近體詩的主要差異。</li>
+      </ul>
 
-<div class="card">
+      <div class="important">
+        <strong>核心主旨：</strong>
+        詩歌透過牽牛星與織女星受到銀河阻隔的故事，表達彼此相距不遠，卻無法相會與交談的離愁相思。
+      </div>
+    </section>
 
-<h2>課文主旨</h2>
+    <section class="card">
+      <h2>二、詩意發展</h2>
 
-<p>
-藉由牛郎與織女被銀河阻隔的故事，
-表達相思與別離之苦。
-</p>
+      <div class="poem-flow">
+        <div>1. 點出人物</div>
+        <div>2. 描寫織布</div>
+        <div>3. 情緒轉折</div>
+        <div>4. 銀河阻隔</div>
+        <div>5. 含情無語</div>
+      </div>
 
-</div>
+      <h3>各階段重點</h3>
 
-<div class="card">
+      <ol>
+        <li>
+          <strong>點出人物：</strong>
+          先由牽牛星與織女星引出牛郎、織女的故事背景。
+        </li>
 
-<h2>必背課文</h2>
+        <li>
+          <strong>描寫織布：</strong>
+          透過織女的手部動作及織布聲音，呈現人物形象。
+        </li>
 
-<blockquote>
+        <li>
+          <strong>情緒轉折：</strong>
+          織女整天織布，卻無法完成花紋，顯示內心受到相思影響。
+        </li>
 
-纖纖擢素手<br>
-札札弄機杼<br><br>
+        <li>
+          <strong>銀河阻隔：</strong>
+          牽牛與織女看似相隔不遠，實際上卻無法相會。
+        </li>
 
-終日不成章<br>
-泣涕零如雨<br><br>
+        <li>
+          <strong>含情無語：</strong>
+          兩者只能隔著銀河凝望，無法互訴衷情。
+        </li>
+      </ol>
 
-盈盈一水間<br>
-脈脈不得語
+      <div class="important">
+        <strong>情感發展：</strong>
+        織布動作 → 無心織布 → 流淚悲傷 → 受到阻隔 → 含情凝望。
+      </div>
+    </section>
 
-</blockquote>
+    <section class="card">
+      <h2>三、重要字詞</h2>
 
-</div>
+      <table>
+        <thead>
+          <tr>
+            <th>字詞</th>
+            <th>讀音</th>
+            <th>解釋</th>
+          </tr>
+        </thead>
 
-<div class="card">
+        <tbody>
+          <tr>
+            <td>迢迢</td>
+            <td>ㄊㄧㄠˊ ㄊㄧㄠˊ</td>
+            <td>遙遠的樣子。</td>
+          </tr>
 
-<h2>生難字</h2>
+          <tr>
+            <td>皎皎</td>
+            <td>ㄐㄧㄠˇ ㄐㄧㄠˇ</td>
+            <td>明亮潔白的樣子。</td>
+          </tr>
 
-<ul>
-<li>擢　ㄓㄨㄛˊ</li>
-<li>杼　ㄓㄨˋ</li>
-<li>涕　ㄊㄧˋ</li>
-<li>脈脈　ㄇㄛˋ ㄇㄛˋ</li>
-<li>札札　ㄓㄚˊ ㄓㄚˊ</li>
-</ul>
+          <tr>
+            <td>纖纖</td>
+            <td>ㄒㄧㄢ ㄒㄧㄢ</td>
+            <td>細長柔美的樣子。</td>
+          </tr>
 
-</div>
+          <tr>
+            <td>擢</td>
+            <td>ㄓㄨㄛˊ</td>
+            <td>舉起、伸出。</td>
+          </tr>
 
-<div class="card">
+          <tr>
+            <td>素手</td>
+            <td>重要注釋</td>
+            <td>潔白的手。</td>
+          </tr>
 
-<h2>古詩十九首重點</h2>
+          <tr>
+            <td>札札</td>
+            <td>ㄓㄚˊ ㄓㄚˊ</td>
+            <td>織布機運作時所發出的聲音。</td>
+          </tr>
 
-<ul>
-<li>東漢作品</li>
-<li>作者不可考</li>
-<li>收錄於《昭明文選》</li>
-<li>五言古詩代表作品</li>
-<li>以離愁別緒最常見</li>
-</ul>
+          <tr>
+            <td>機杼</td>
+            <td>ㄐㄧ ㄓㄨˋ</td>
+            <td>織布機及織布工具。</td>
+          </tr>
 
-</div>
+          <tr>
+            <td>章</td>
+            <td>重要字義</td>
+            <td>織布形成的花紋，不是文章或章節。</td>
+          </tr>
 
-<div class="card">
+          <tr>
+            <td>涕</td>
+            <td>ㄊㄧˋ</td>
+            <td>眼淚。</td>
+          </tr>
 
-<h2>歷屆常考重點</h2>
+          <tr>
+            <td>盈盈</td>
+            <td>ㄧㄥˊ ㄧㄥˊ</td>
+            <td>水清淺的樣子。</td>
+          </tr>
 
-<ul>
-<li>牛郎織女故事</li>
-<li>盈盈一水間意思</li>
-<li>脈脈不得語意思</li>
-<li>古詩十九首特色</li>
-<li>古體詩與近體詩比較</li>
-</ul>
+          <tr>
+            <td>脈脈</td>
+            <td>ㄇㄛˋ ㄇㄛˋ</td>
+            <td>含情凝視的樣子。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-</div>
+    <section class="card">
+      <h2>四、疊字整理</h2>
 
-<div class="card">
+      <p>
+        本課大量使用疊字，使詩句具有節奏感，也能強化人物形象與情感。
+      </p>
 
-<h2>自我測驗</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>疊字</th>
+            <th>描寫對象</th>
+            <th>作用</th>
+          </tr>
+        </thead>
 
-<p>
-Q1：本課主要描述哪兩位人物？
-</p>
+        <tbody>
+          <tr>
+            <td>迢迢</td>
+            <td>牽牛星</td>
+            <td>表現距離遙遠。</td>
+          </tr>
 
-<details>
-<summary>點我看答案</summary>
-牛郎與織女
-</details>
+          <tr>
+            <td>皎皎</td>
+            <td>織女星</td>
+            <td>表現明亮潔白。</td>
+          </tr>
 
-<br>
+          <tr>
+            <td>纖纖</td>
+            <td>織女的手</td>
+            <td>表現細長柔美。</td>
+          </tr>
 
-<p>
-Q2：纖纖擢素手中的「擢」是什麼意思？
-</p>
+          <tr>
+            <td>札札</td>
+            <td>織布聲</td>
+            <td>屬於聽覺摹寫與狀聲詞。</td>
+          </tr>
 
-<details>
-<summary>點我看答案</summary>
-舉起
-</details>
+          <tr>
+            <td>盈盈</td>
+            <td>銀河</td>
+            <td>表現水清淺的樣子。</td>
+          </tr>
 
-</div>
+          <tr>
+            <td>脈脈</td>
+            <td>人物神情</td>
+            <td>表現含情凝視而無法說話。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-</div>
+    <section class="card">
+      <h2>五、重要詩意理解</h2>
 
-</body>
-</html>
+      <h3>1. 為什麼織女整天織布卻無法完成？</h3>
+
+      <p>
+        不是因為織女不會織布，而是因為思念牽牛，內心悲傷，因此無法專心完成織布。
+      </p>
+
+      <h3>2. 銀河看似清淺，為什麼兩人仍不能相會？</h3>
+
+      <p>
+        銀河代表阻隔。距離看似不遠，兩人卻受到限制而無法跨越，形成「咫尺天涯」的遺憾。
+      </p>
+
+      <h3>3. 結尾為何具有強烈的感染力？</h3>
+
+      <p>
+        結尾沒有安排兩人相會，而是讓兩人含情凝望卻無法交談，留下相思與無奈的餘韻。
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>六、《古詩十九首》必考常識</h2>
+
+      <ul>
+        <li>作品大致產生於東漢末年。</li>
+        <li>作者多不可考。</li>
+        <li>後由昭明太子蕭統編入《昭明文選》。</li>
+        <li>蕭統是編選者，不是全部詩作的作者。</li>
+        <li>各詩原本多沒有篇名，後人常用第一句作為篇名。</li>
+        <li>以五言詩為主，是五言古詩成熟的重要代表。</li>
+        <li>語言特色質樸自然，情感真切。</li>
+        <li>常見主題包括遊子思鄉、離愁別緒、人生無常及社會動亂。</li>
+      </ul>
+
+      <div class="important">
+        <strong>最容易考錯：</strong>
+        《古詩十九首》的作者不可考，蕭統是《昭明文選》的編選者，不是《古詩十九首》的作者。
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>七、古體詩與近體詩比較</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>比較項目</th>
+            <th>古體詩</th>
+            <th>近體詩</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>興盛時代</td>
+            <td>漢、魏、六朝</td>
+            <td>唐代</td>
+          </tr>
+
+          <tr>
+            <td>句數</td>
+            <td>限制較少</td>
+            <td>絕句四句，律詩八句</td>
+          </tr>
+
+          <tr>
+            <td>字數</td>
+            <td>較自由，以五言、七言常見</td>
+            <td>以五言、七言為主</td>
+          </tr>
+
+          <tr>
+            <td>平仄</td>
+            <td>限制較少</td>
+            <td>講究平仄及格律</td>
+          </tr>
+
+          <tr>
+            <td>對仗</td>
+            <td>沒有嚴格規定</td>
+            <td>律詩的頷聯、頸聯通常必須對仗</td>
+          </tr>
+
+          <tr>
+            <td>押韻</td>
+            <td>可換韻</td>
+            <td>通常一韻到底</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="important">
+        <strong>常見陷阱：</strong>
+        不是所有近體詩的每一聯都必須對仗。律詩通常是頷聯、頸聯必須對仗。
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>八、文化常識</h2>
+
+      <ul>
+        <li><strong>七夕：</strong>與牛郎、織女一年一度相會的傳說有關。</li>
+        <li><strong>銀河：</strong>詩中阻隔牽牛、織女的空間意象。</li>
+        <li><strong>牽牛星：</strong>與牛郎形象連結。</li>
+        <li><strong>織女星：</strong>與織女形象連結。</li>
+        <li><strong>咫尺天涯：</strong>距離很近，卻像相隔天涯般無法接近。</li>
+        <li><strong>動如參商：</strong>比喻彼此分離，難以相見。</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>九、考古題高頻考點</h2>
+
+      <ol>
+        <li>「擢、杼、章、涕、盈盈、脈脈」的字義。</li>
+        <li>織女無法完成織布的原因。</li>
+        <li>詩中所表達的離愁與相思。</li>
+        <li>銀河在詩中所代表的阻隔作用。</li>
+        <li>疊字所形成的節奏、聲音及人物形象。</li>
+        <li>《古詩十九首》的時代、作者及收錄典籍。</li>
+        <li>古體詩與近體詩的格律差異。</li>
+        <li>七夕、牛郎織女與銀河等文化常識。</li>
+        <li>延伸閱讀其他五言古詩並判斷主旨。</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>十、常見易錯觀念</h2>
+
+      <ul>
+        <li>「篇章」的章通常指文章，但本詩中的章指織布花紋。</li>
+        <li>「脈脈」讀作ㄇㄛˋ ㄇㄛˋ，不讀作ㄇㄞˋ ㄇㄞˋ。</li>
+        <li>「涕」在古文中是眼淚，不是現代常說的鼻涕。</li>
+        <li>織女不是因為技術不好而無法完成織布。</li>
+        <li>《古詩十九首》的作者不可考，蕭統是編選者。</li>
+        <li>古體詩可以換韻，近體詩通常一韻到底。</li>
+        <li>本詩的主要情感是離愁相思，不是單純敘述神話故事
