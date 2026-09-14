@@ -274,23 +274,20 @@
 
     <div id="result"></div>
 
-  </main>
+   </main>
 
-  <!--
-    questions.js 必須和 quiz_v3.html 放在同一個 chinese 資料夾。
-    questions.js 第一行應為：
-    window.questionBank = [
-  -->
-  <script
-    src="./questions.jsscript"
-    onerror="showQuestionFileError()">
-  </script>
+  <!-- 載入題庫。questions.js 必須與 quiz_v3.html 放在同一資料夾 -->
+  <script src="./questions.js"></script>
 
   <script>
-    "ubmitted = false;
+    "use strict";
+
+    let examQuestions = [];
+    let quizSubmitted = false;
 
     const MAX_QUESTION_COUNT = 50;
 
+    // 避免錯題內容中的特殊字元被當成 HTML
     function escapeHtml(value) {
       return String(value)
         .replaceAll("&", "&amp;")
@@ -300,32 +297,7 @@
         .replaceAll("'", "&#039;");
     }
 
-    function showQuestionFileError() {
-      const quizDiv = document.getElementById("quiz");
-      const progress = document.getElementById("progress");
-      const submitButton = document.getElementById("submitButton");
-
-      if (quizDiv) {
-        quizDiv.innerHTML =
-          '<div class="warning">' +
-            '<h2>⚠️ questions.js 載入失敗</h2>' +
-            '<p>請確認 questions.js 與 quiz_v3.html 放在同一個 chinese 資料夾。</p>' +
-            '<p>題庫網址應為：</p>' +
-            '<div class="error-details">' +
-              'https://beck-chen999.github.io/junior-high-learning/chinese/questions.js' +
-            '</div>' +
-          '</div>';
-      }
-
-      if (progress) {
-        progress.textContent = "題庫載入失敗";
-      }
-
-      if (submitButton) {
-        submitButton.disabled = true;
-      }
-    }
-
+    // 隨機洗牌
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -336,6 +308,7 @@
       return array;
     }
 
+    // 檢查題庫格式
     function validateQuestionBank(questionBank) {
       if (!Array.isArray(questionBank)) {
         return "questionBank 不是陣列。";
@@ -349,14 +322,17 @@
         const question = questionBank[i];
 
         if (!question || typeof question !== "object") {
-          return "第 " + (i + 1) + " 筆題目不是正確物件。";
+          return "第 " + (i + 1) + " 筆資料不是正確的題目物件。";
         }
 
         if (typeof question.question !== "string") {
-          return "第 " + (i + 1) + " 筆缺少 question 文字。";
+          return "第 " + (i + 1) + " 題缺少 question。";
         }
 
-        if (!Array.isArray(question.options) || question.options.length < 2) {
+        if (
+          !Array.isArray(question.options) ||
+          question.options.length < 2
+        ) {
           return "第 " + (i + 1) + " 題的 options 格式錯誤。";
         }
 
@@ -372,6 +348,7 @@
       return "";
     }
 
+    // 載入並顯示題目
     function loadQuiz() {
       const quizDiv = document.getElementById("quiz");
       const resultDiv = document.getElementById("result");
@@ -384,26 +361,30 @@
       if (!window.questionBank) {
         quizDiv.innerHTML =
           '<div class="warning">' +
-            '<h2>⚠️ 題庫變數尚未建立</h2>' +
-            '<p>questions.js 已被要求載入，但沒有成功建立 window.questionBank。</p>' +
-            '<p>請檢查 questions.js 是否仍有紅色 JavaScript 語法錯誤。</p>' +
-          '</div>';
+            "<h2>⚠️ 題庫載入失敗</h2>" +
+            "<p>questions.js 沒有成功建立 window.questionBank。</p>" +
+            "<p>請檢查 questions.js 是否有 JavaScript 語法錯誤。</p>" +
+            '<div class="error-details">' +
+              "正確題庫檔案：./questions.js" +
+            "</div>" +
+          "</div>";
 
-        progress.textContent = "找不到 questionBank";
+        progress.textContent = "題庫載入失敗";
         submitButton.disabled = true;
         return;
       }
 
-      const validationError = validateQuestionBank(window.questionBank);
+      const validationError =
+        validateQuestionBank(window.questionBank);
 
       if (validationError) {
         quizDiv.innerHTML =
           '<div class="warning">' +
-            '<h2>⚠️ 題庫格式有誤</h2>' +
+            "<h2>⚠️ 題庫格式有誤</h2>" +
             '<div class="error-details">' +
               escapeHtml(validationError) +
-            '</div>' +
-          '</div>';
+            "</div>" +
+          "</div>";
 
         progress.textContent = "題庫格式錯誤";
         submitButton.disabled = true;
@@ -422,33 +403,53 @@
       quizDiv.innerHTML = "";
 
       examQuestions.forEach(function (question, questionIndex) {
-        const questionCard = document.createElement("section");
+        const questionCard =
+          document.createElement("section");
+
         questionCard.className = "question";
         questionCard.id = "question-" + questionIndex;
 
-        const lessonTag = document.createElement("div");
-        lessonTag.className = "lesson-tag";
-        lessonTag.textContent = question.lesson || "未分類";
+        const lessonTag =
+          document.createElement("div");
 
-        const heading = document.createElement("h3");
+        lessonTag.className = "lesson-tag";
+        lessonTag.textContent =
+          question.lesson || "未分類";
+
+        const heading =
+          document.createElement("h3");
+
         heading.textContent =
-          (questionIndex + 1) + ". " + question.question;
+          (questionIndex + 1) +
+          ". " +
+          question.question;
 
         questionCard.appendChild(lessonTag);
         questionCard.appendChild(heading);
 
-        question.options.forEach(function (option, optionIndex) {
-          const label = document.createElement("label");
+        question.options.forEach(function (
+          option,
+          optionIndex
+        ) {
+          const label =
+            document.createElement("label");
+
           label.className = "option";
 
-          const input = document.createElement("input");
+          const input =
+            document.createElement("input");
+
           input.type = "radio";
           input.name = "q" + questionIndex;
           input.value = String(optionIndex);
 
-          const optionText = document.createElement("span");
+          const optionText =
+            document.createElement("span");
+
           optionText.textContent =
-            String.fromCharCode(65 + optionIndex) + ". " + option;
+            String.fromCharCode(65 + optionIndex) +
+            ". " +
+            option;
 
           label.appendChild(input);
           label.appendChild(optionText);
@@ -469,32 +470,41 @@
       submitButton.textContent = "提交答案";
     }
 
+    // 讀取既有錯題本
     function getExistingWrongBook() {
       try {
         const storedData = JSON.parse(
           localStorage.getItem("wrongbook")
         );
 
-        return Array.isArray(storedData) ? storedData : [];
+        return Array.isArray(storedData)
+          ? storedData
+          : [];
       } catch (error) {
         console.error("讀取錯題本失敗：", error);
         return [];
       }
     }
 
+    // 合併錯題並避免重複
     function mergeWrongBook(oldItems, newItems) {
       const mergedItems = oldItems.slice();
 
       newItems.forEach(function (newItem) {
-        const existingIndex = mergedItems.findIndex(function (oldItem) {
-          return (
-            oldItem.id === newItem.id ||
-            (
+        const existingIndex =
+          mergedItems.findIndex(function (oldItem) {
+            if (
+              newItem.id !== null &&
+              oldItem.id === newItem.id
+            ) {
+              return true;
+            }
+
+            return (
               oldItem.lesson === newItem.lesson &&
               oldItem.question === newItem.question
-            )
-          );
-        });
+            );
+          });
 
         if (existingIndex >= 0) {
           mergedItems[existingIndex] = newItem;
@@ -506,42 +516,58 @@
       return mergedItems;
     }
 
+    // 批改答案
     function checkAnswer() {
-      if (!Array.isArray(examQuestions) || examQuestions.length === 0) {
+      if (
+        !Array.isArray(examQuestions) ||
+        examQuestions.length === 0
+      ) {
         document.getElementById("result").innerHTML =
           '<div class="warning">' +
-            '<h2>⚠️ 目前沒有可批改的題目</h2>' +
-            '<p>請確認題庫已正常載入。</p>' +
-          '</div>';
+            "<h2>⚠️ 目前沒有可批改的題目</h2>" +
+            "<p>請確認題庫已正常載入。</p>" +
+          "</div>";
 
         return;
       }
 
       if (quizSubmitted) {
-        document.getElementById("result").scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
+        document
+          .getElementById("result")
+          .scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
 
         return;
       }
 
       let score = 0;
       let unansweredCount = 0;
+
       const wrongQuestions = [];
 
-      document.querySelectorAll(".question").forEach(function (card) {
-        card.classList.remove("unanswered");
-      });
+      document
+        .querySelectorAll(".question")
+        .forEach(function (card) {
+          card.classList.remove("unanswered");
+        });
 
-      examQuestions.forEach(function (question, questionIndex) {
-        const selected = document.querySelector(
-          'input[name="q' + questionIndex + '"]:checked'
-        );
+      examQuestions.forEach(function (
+        question,
+        questionIndex
+      ) {
+        const selected =
+          document.querySelector(
+            'input[name="q' +
+            questionIndex +
+            '"]:checked'
+          );
 
-        const questionCard = document.getElementById(
-          "question-" + questionIndex
-        );
+        const questionCard =
+          document.getElementById(
+            "question-" + questionIndex
+          );
 
         if (!selected) {
           unansweredCount++;
@@ -559,17 +585,31 @@
           score++;
         } else {
           wrongQuestions.push({
-            id: question.id || null,
-            lesson: question.lesson || "未分類",
-            question: question.question,
+            id:
+              typeof question.id === "number"
+                ? question.id
+                : null,
+
+            lesson:
+              question.lesson || "未分類",
+
+            question:
+              question.question,
+
             userAnswer:
               selectedAnswer === null
                 ? "未作答"
                 : question.options[selectedAnswer],
-            correct: question.options[question.answer],
+
+            correct:
+              question.options[question.answer],
+
             explanation:
-              question.explanation || "請複習本單元相關內容。",
-            date: new Date().toLocaleString("zh-TW")
+              question.explanation ||
+              "請複習本單元相關內容。",
+
+            date:
+              new Date().toLocaleString("zh-TW")
           });
         }
       });
@@ -581,63 +621,75 @@
       let resultHtml =
         '<div class="result-card">' +
           '<div class="good">' +
-            '<h2>🎯 得分：' +
+            "<h2>🎯 得分：" +
               score +
               " / " +
               examQuestions.length +
-            '</h2>' +
-            '<h2>📊 成績：' +
+            "</h2>" +
+            "<h2>📊 成績：" +
               percent +
-              ' 分</h2>' +
-            '<p>未作答：' +
+              " 分</h2>" +
+            "<p>未作答：" +
               unansweredCount +
-              ' 題</p>' +
-          '</div>';
+              " 題</p>" +
+          "</div>";
 
       if (wrongQuestions.length > 0) {
         resultHtml +=
-          '<h2>❌ 錯題解析，共 ' +
+          "<h2>❌ 錯題解析，共 " +
           wrongQuestions.length +
-          ' 題</h2>';
+          " 題</h2>";
 
-        wrongQuestions.forEach(function (item, index) {
+        wrongQuestions.forEach(function (
+          item,
+          index
+        ) {
           resultHtml +=
             '<div class="analysis">' +
               '<div class="lesson-tag">' +
                 escapeHtml(item.lesson) +
-              '</div>' +
-              '<p><strong>錯題 ' +
+              "</div>" +
+
+              "<p><strong>錯題 " +
                 (index + 1) +
                 "：</strong>" +
                 escapeHtml(item.question) +
-              '</p>' +
-              '<p class="user-answer">你的答案：' +
+              "</p>" +
+
+              '<p class="user-answer">' +
+                "你的答案：" +
                 escapeHtml(item.userAnswer) +
-              '</p>' +
-              '<p class="correct-answer">正確答案：' +
+              "</p>" +
+
+              '<p class="correct-answer">' +
+                "正確答案：" +
                 escapeHtml(item.correct) +
-              '</p>' +
-              '<p><strong>解析：</strong>' +
+              "</p>" +
+
+              "<p><strong>解析：</strong>" +
                 escapeHtml(item.explanation) +
-              '</p>' +
-            '</div>';
+              "</p>" +
+            "</div>";
         });
       } else {
         resultHtml +=
           '<div class="good" style="margin-top:20px;">' +
-            '<h2>🎉 全部答對！</h2>' +
-          '</div>';
+            "<h2>🎉 全部答對！</h2>" +
+          "</div>";
       }
 
       resultHtml += "</div>";
 
-      document.getElementById("result").innerHTML = resultHtml;
+      document.getElementById("result").innerHTML =
+        resultHtml;
 
+      // 儲存最新成績
       localStorage.setItem(
         "chinese_exam1_score",
         String(percent)
       );
 
+      // 儲存歷史成績
       let scoreHistory = [];
 
       try {
@@ -649,11 +701,15 @@
           scoreHistory = savedHistory;
         }
       } catch (error) {
-        console.error("讀取歷史成績失敗：", error);
+        console.error(
+          "讀取歷史成績失敗：",
+          error
+        );
       }
 
       scoreHistory.push({
-        date: new Date().toLocaleString("zh-TW"),
+        date:
+          new Date().toLocaleString("zh-TW"),
         score: percent,
         correct: score,
         total: examQuestions.length,
@@ -665,11 +721,15 @@
         JSON.stringify(scoreHistory)
       );
 
-      const oldWrongBook = getExistingWrongBook();
-      const mergedWrongBook = mergeWrongBook(
-        oldWrongBook,
-        wrongQuestions
-      );
+      // 儲存並累積錯題
+      const oldWrongBook =
+        getExistingWrongBook();
+
+      const mergedWrongBook =
+        mergeWrongBook(
+          oldWrongBook,
+          wrongQuestions
+        );
 
       localStorage.setItem(
         "wrongbook",
@@ -678,39 +738,66 @@
 
       quizSubmitted = true;
 
-      const submitButton = document.getElementById("submitButton");
+      const submitButton =
+        document.getElementById(
+          "submitButton"
+        );
+
       submitButton.disabled = true;
       submitButton.textContent = "已完成批改";
 
-      document.getElementById("result").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+      document
+        .getElementById("result")
+        .scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
-      const submitButton = document.getElementById("submitButton");
-      const newQuizButton = document.getElementById("newQuizButton");
+    // 頁面載入後初始化
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+        const submitButton =
+          document.getElementById(
+            "submitButton"
+          );
 
-      submitButton.addEventListener("click", checkAnswer);
+        const newQuizButton =
+          document.getElementById(
+            "newQuizButton"
+          );
 
-      newQuizButton.addEventListener("click", function () {
-        const confirmed = window.confirm(
-          "確定要重新抽題嗎？目前尚未提交的答案將會消失。"
+        submitButton.addEventListener(
+          "click",
+          checkAnswer
         );
 
-        if (confirmed) {
-          loadQuiz();
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-          });
-        }
-      });
+        newQuizButton.addEventListener(
+          "click",
+          function () {
+            const confirmed = window.confirm(
+              "確定要重新抽題嗎？目前尚未提交的答案將會消失。"
+            );
 
-      loadQuiz();
-    });
+            if (confirmed) {
+              loadQuiz();
+
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+              });
+            }
+          }
+        );
+
+        loadQuiz();
+      }
+    );
   </script>
+
+</body>
+</html>
 
 </body>
 </html>
