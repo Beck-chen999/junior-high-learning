@@ -183,7 +183,7 @@ question:"下列何者屬於聯綿詞？",
 options:["老師","學生","葡萄","教室"],
 answer:2,
 explanation:"葡萄為聯綿詞。"
-}
+},
 
 {
 id:21,
