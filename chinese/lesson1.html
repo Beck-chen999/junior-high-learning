@@ -1,46 +1,438 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
-<meta charset="utf-8">
-<title>第1課 田園之秋選</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>第1課 田園之秋選</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: #263238;
+      background: #f4f7fb;
+      font-family: "Microsoft JhengHei", sans-serif;
+      line-height: 1.8;
+    }
+
+    header {
+      padding: 28px 20px;
+      color: white;
+      text-align: center;
+      background: #1565c0;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,.08);
+    }
+
+    nav a {
+      padding: 8px 14px;
+      color: #1565c0;
+      background: #e3f2fd;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      padding: 22px;
+      margin-bottom: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.08);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #1565c0;
+    }
+
+    h3 {
+      color: #37474f;
+    }
+
+    .important {
+      padding: 15px;
+      background: #fff8e1;
+      border-left: 5px solid #ffb300;
+      border-radius: 8px;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      text-align: center;
+    }
+
+    .process div {
+      padding: 16px 8px;
+      color: #0d47a1;
+      background: #e3f2fd;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      border: 1px solid #cfd8dc;
+      text-align: left;
+    }
+
+    th {
+      background: #e3f2fd;
+    }
+
+    .check-item {
+      display: block;
+      padding: 10px;
+      margin: 7px 0;
+      background: #f7f9fb;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    .progress-bar {
+      height: 20px;
+      overflow: hidden;
+      background: #eceff1;
+      border-radius: 10px;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: #43a047;
+      transition: width .3s;
+    }
+
+    .quiz-link {
+      display: inline-block;
+      padding: 11px 18px;
+      color: white;
+      background: #1565c0;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @media (max-width: 700px) {
+      .process {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<h1>第1課 田園之秋選</h1>
+  <header>
+    <h1>🌧️ 第1課 田園之秋選</h1>
+    <p>西北雨的戲劇性變化與多感官描寫</p>
+  </header>
 
-<h2>課文主旨</h2>
+  <nav>
+    <a href="index.html">🏠 國文首頁</a>
+    <a href="lesson2.html">下一課</a>
+    <aam1.html段考總複習</a>
+    <a href="quiz_v3.html">模擬測驗</
 
-<p>
-描寫西北雨從開始到結束的過程，
-展現大自然戲劇般的壯麗景象。
-</p>
+  <main class="container">
 
-<h2>必考重點</h2>
+    <section class="card">
+      <h2>一、作者與文章特色</h2>
 
-<ol>
-<li>烏雲密布</li>
-<li>雷電交加</li>
-<li>大雨滂沱</li>
-<li>雨過天青</li>
-</ol>
+      <p>
+        作者陳冠學擅長觀察田園環境與自然現象。本文描寫一場西北雨從醞釀、爆發到結束的完整過程，將大自然呈現得像一齣有前奏、高潮與結尾的戲劇。
+      </p>
 
-<h2>生難字</h2>
+      <div class="important">
+        <strong>核心主旨：</strong>
+        透過西北雨的快速變化與強大氣勢，表現大自然充滿力量又富有戲劇性的景象。
+      </div>
+    </section>
 
-<ul>
-<li>攫 ㄐㄩㄝˊ</li>
-<li>懾 ㄓㄜˊ</li>
-<li>霎 ㄕㄚˋ</li>
-<li>滂沱 ㄆㄤ ㄊㄨㄛˊ</li>
-</ul>
+    <section class="card">
+      <h2>二、西北雨的發展順序</h2>
 
-<h2>常考修辭</h2>
+      <div class="process">
+        <div>1. 烏雲密布</div>
+        <div>2. 雷電交加</div>
+        <div>3. 大雨滂沱</div>
+        <div>4. 雨過天青</div>
+      </div>
 
-<ul>
-<li>摹寫法</li>
-<li>移覺法</li>
-<li>譬喻法</li>
-</ul>
+      <h3>各階段整理</h3>
+
+      <ul>
+        <li><strong>烏雲密布：</strong>雨勢尚未爆發，先營造壓迫、緊張的氣氛。</li>
+        <li><strong>雷電交加：</strong>以聲音、光線和動態描寫呈現強烈威勢。</li>
+        <li><strong>大雨滂沱：</strong>西北雨進入高潮，強調雨量大、來勢快。</li>
+        <li><strong>雨過天青：</strong>景物恢復明亮清新，氣氛由緊張轉為輕快。</li>
+      </ul>
+
+      <div class="important">
+        <strong>段考必考：</strong>
+        「烏雲 → 雷電 → 大雨 → 天晴」的順序，以及每個階段的氣氛變化。
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>三、重要寫作手法</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>手法</th>
+            <th>說明</th>
+            <th>判斷重點</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>視覺摹寫</td>
+            <td>描寫雲、閃電、雨水、陽光及色彩。</td>
+            <td>看到形狀、顏色、明暗或動作。</td>
+          </tr>
+
+          <tr>
+            <td>聽覺摹寫</td>
+            <td>描寫雷聲、雨聲與自然界的各種聲響。</td>
+            <td>出現聲音或狀聲詞。</td>
+          </tr>
+
+          <tr>
+            <td>擬人</td>
+            <td>將烏雲、雷電或雨勢寫得像有動作與意志的人。</td>
+            <td>自然景物出現人的動作或個性。</td>
+          </tr>
+
+          <tr>
+            <td>譬喻</td>
+            <td>用熟悉的形象描述自然景物，使畫面更具體。</td>
+            <td>判斷本體、喻體及兩者的相似點。</td>
+          </tr>
+
+          <tr>
+            <td>移覺</td>
+            <td>用一種感官印象表現另一種感官感受。</td>
+            <td>例如用音樂感受表現眼前明亮清新的景象。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>四、生難字與重要詞語</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>字詞</th>
+            <th>讀音</th>
+            <th>解釋</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>攫</td>
+            <td>ㄐㄩㄝˊ</td>
+            <td>抓取、奪取。</td>
+          </tr>
+
+          <tr>
+            <td>霎時</td>
+            <td>ㄕㄚˋ ㄕˊ</td>
+            <td>極短的時間。</td>
+          </tr>
+
+          <tr>
+            <td>震懾</td>
+            <td>ㄓㄣˋ ㄓㄜˊ</td>
+            <td>因威勢而感到震驚恐懼。</td>
+          </tr>
+
+          <tr>
+            <td>滂沱</td>
+            <td>ㄆㄤ ㄊㄨㄛˊ</td>
+            <td>雨勢很大的樣子。</td>
+          </tr>
+
+          <tr>
+            <td>肆虐</td>
+            <td>ㄙˋ ㄋㄩㄝˋ</td>
+            <td>任意侵害或破壞。</td>
+          </tr>
+
+          <tr>
+            <td>行潦</td>
+            <td>ㄒㄧㄥˊ ㄌㄠˇ</td>
+            <td>道路上的積水。</td>
+          </tr>
+
+          <tr>
+            <td>氣脫委頓</td>
+            <td>重要注釋</td>
+            <td>失神無力、疲乏困頓的樣子。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>五、考古題高頻考點</h2>
+
+      <ol>
+        <li>排列西北雨發展的正確順序。</li>
+        <li>判斷哪一句最具有動態感。</li>
+        <li>辨認視覺、聽覺及其他感官摹寫。</li>
+        <li>辨認用聽覺印象表現視覺效果的移覺。</li>
+        <li>分析動物或植物描寫所烘托的自然威力。</li>
+        <li>理解文章以戲劇結構描寫自然現象的方式。</li>
+        <li>判斷西北雨來得快、去得快的特點。</li>
+        <li>比較其他詩文中的暴雨、雷電與雨後景象。</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>六、常見易錯觀念</h2>
+
+      <ul>
+        <li>移覺不是一般譬喻，重點是不同感官之間的轉換。</li>
+        <li>文章重點不只是「下大雨」，而是呈現雨勢發展的戲劇性。</li>
+        <li>描寫烏雲的句子不一定是在描寫雷電，要先確認描寫對象。</li>
+        <li>雨後引用音樂意象，主要表現清新、明亮與平靜。</li>
+        <li>西北雨常見於夏季午後，特色是時間短、雨勢急、變化快。</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>七、每日複習清單</h2>
+
+      <p>勾選結果會自動保存在這台裝置的瀏覽器中。</p>
+
+      <label class="check-item">
+        <input type="checkbox" class="daily-check">
+        我能背出西北雨的四個發展階段。
+      </label>
+
+      <label class="check-item">
+        <input type="checkbox" class="daily-check">
+        我能分辨視覺摹寫與聽覺摹寫。
+      </label>
+
+      <label class="check-item">
+        <input type="checkbox" class="daily-check">
+        我知道什麼是移覺。
+      </label>
+
+      <label class="check-item">
+        <input type="checkbox" class="daily-check">
+        我會讀寫攫、懾、霎、虐、滂沱。
+      </label>
+
+      <label class="check-item">
+        <input type="checkbox" class="daily-check">
+        我能說明文章為什麼像一齣戲劇。
+      </label>
+
+      <label class="check-item">
+        <input type="checkbox" class="daily-check">
+        我今天至少完成5題第一課練習。
+      </label>
+
+      <p id="dailyProgress">今日完成度：0%</p>
+
+      <div class="progress-bar">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>八、完成本課後</h2>
+
+      <a class="quiz-link" href="quiz_v3
+      </a>
+    </section>
+
+  </main>
+
+  <script>
+    const storageKey = "lesson1DailyReview";
+    const checkboxes = document.querySelectorAll(".daily-check");
+    const savedChecks = JSON.parse(
+      localStorage.getItem(storageKey) || "[]"
+    );
+
+    checkboxes.forEach(function (checkbox, index) {
+      checkbox.checked = savedChecks[index] || false;
+
+      checkbox.addEventListener("change", function () {
+        const currentChecks = Array.from(checkboxes).map(function (item) {
+          return item.checked;
+        });
+
+        localStorage.setItem(
+          storageKey,
+          JSON.stringify(currentChecks)
+        );
+
+        updateProgress();
+      });
+    });
+
+    function updateProgress() {
+      const completed = Array.from(checkboxes).filter(function (item) {
+        return item.checked;
+      }).length;
+
+      const percent = Math.round(
+        completed / checkboxes.length * 100
+      );
+
+      document.getElementById("dailyProgress").textContent =
+        "今日完成度：" + percent + "%";
+
+      document.getElementById("progressFill").style.width =
+        percent + "%";
+    }
+
+    updateProgress();
+  </script>
 
 </body>
 </html>
