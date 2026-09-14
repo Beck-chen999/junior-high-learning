@@ -2,204 +2,565 @@
 <html lang="zh-Hant">
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>第3課 下雨天，真好</title>
+  <title>第3課 下雨天，真好</title>
 
-<style>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-body{
-font-family:"Microsoft JhengHei";
-background:#f5f5f5;
-margin:0;
-}
+    body {
+      margin: 0;
+      color: #263238;
+      background: #fff8f2;
+      font-family: "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+      line-height: 1.8;
+    }
 
-header{
-background:#ff9800;
-color:white;
-padding:20px;
-text-align:center;
-}
+    header {
+      padding: 28px 20px;
+      color: white;
+      text-align: center;
+      background: #ef6c00;
+    }
 
-.container{
-max-width:1000px;
-margin:auto;
-padding:20px;
-}
+    header h1 {
+      margin: 0 0 8px;
+    }
 
-.card{
-background:white;
-padding:20px;
-margin-bottom:20px;
-border-radius:10px;
-box-shadow:0 2px 4px rgba(0,0,0,.1);
-}
+    header p {
+      margin: 0;
+    }
 
-h2{
-color:#ff9800;
-}
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    }
 
-</style>
+    nav a {
+      padding: 8px 14px;
+      color: #e65100;
+      background: #fff3e0;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
+    nav a:hover {
+      color: white;
+      background: #ef6c00;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      padding: 22px;
+      margin-bottom: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #ef6c00;
+    }
+
+    h3 {
+      color: #5d4037;
+    }
+
+    .important {
+      padding: 15px;
+      margin-top: 15px;
+      background: #fff8e1;
+      border-left: 5px solid #ffb300;
+      border-radius: 8px;
+    }
+
+    .emotion-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .emotion-flow div {
+      padding: 15px 8px;
+      color: #bf360c;
+      background: #fff3e0;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      border: 1px solid #d7ccc8;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #fff3e0;
+    }
+
+    .review-list {
+      padding-left: 24px;
+    }
+
+    .review-list li {
+      margin-bottom: 8px;
+    }
+
+    .check-item {
+      display: block;
+      padding: 11px;
+      margin: 8px 0;
+      background: #fafafa;
+      border: 1px solid #eeeeee;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    .check-item:hover {
+      background: #fff3e0;
+    }
+
+    .check-item input {
+      margin-right: 8px;
+    }
+
+    .progress-text {
+      margin-top: 18px;
+      font-weight: bold;
+    }
+
+    .progress-bar {
+      height: 20px;
+      overflow: hidden;
+      background: #eceff1;
+      border-radius: 10px;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: #43a047;
+      transition: width 0.3s;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .action-link {
+      display: inline-block;
+      padding: 11px 18px;
+      color: white;
+      background: #ef6c00;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .action-link:hover {
+      background: #e65100;
+    }
+
+    .secondary-link {
+      background: #607d8b;
+    }
+
+    .secondary-link:hover {
+      background: #455a64;
+    }
+
+    .reset-button {
+      padding: 11px 18px;
+      color: white;
+      background: #757575;
+      border: 0;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .reset-button:hover {
+      background: #424242;
+    }
+
+    @media (max-width: 800px) {
+      .emotion-flow {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .container {
+        padding: 12px;
+      }
+
+      .card {
+        padding: 17px;
+      }
+
+      table {
+        font-size: 15px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .emotion-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .action-link,
+      .reset-button {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
+  <header>
+    <h1>☔ 第3課 下雨天，真好</h1>
+    <p>童年回憶、家庭親情與思鄉情感</p>
+  </header>
 
-<h1>☔ 第3課 下雨天，真好</h1>
+  <nav>
+    <a href="index.html">🏠 國文首頁</a>
+    <a href="lesson2.html">⬅️ 上一課</a>
+    <a href="grammar.html">➡️ 語文常識</a>
+    exam1.html📝 段考總複習</a>
+    <a href="quiz_v3.htmla>
+  </nav>
 
-<p>琦君的童年回憶與親情世界</p>
+  <main class="container">
 
-</header>
+    <section class="card">
+      <h2>一、作者與文體</h2>
 
-<div class="container">
+      <h3>作者：琦君</h3>
 
-<div class="card">
+      <p>
+        琦君本名潘希真，作品常從日常生活、家庭往事及故鄉記憶出發，文字自然細膩，具有濃厚的親情與思鄉色彩。
+      </p>
 
-<h2>作者介紹</h2>
+      <h3>文體特色</h3>
 
-<p>
-琦君，本名潘希真。
-擅長散文寫作，
-作品充滿親情與鄉愁。
-</p>
+      <p>
+        本文屬於回憶性抒情散文。作者以雨天為線索，串聯童年生活、家庭人物及成年後的故鄉記憶。
+      </p>
 
-</div>
+      <div class="important">
+        <strong>核心主旨：</strong>
+        作者透過童年雨天生活的回憶，表現親情的溫暖、童年時光的美好，以及離鄉後綿長的思念。
+      </div>
+    </section>
 
-<div class="card">
+    <section class="card">
+      <h2>二、文章結構</h2>
 
-<h2>課文主旨</h2>
+      <div class="emotion-flow">
+        <div>1. 童年雨天</div>
+        <div>2. 家庭人物</div>
+        <div>3. 長大離鄉</div>
+        <div>4. 雨中懷念</div>
+      </div>
 
-<p>
-透過雨天的回憶，
-描寫童年生活的歡樂，
-以及對母親、父親和故鄉的懷念。
-</p>
+      <h3>各階段重點</h3>
 
-</div>
+      <ol class="review-list">
+        <li>
+          <strong>童年雨天：</strong>
+          雨天帶來遊戲、食物、故事與家人的陪伴，充滿歡樂與安全感。
+        </li>
 
-<div class="card">
+        <li>
+          <strong>家庭人物：</strong>
+          作者透過生活中的動作、言語和細節，呈現母親、父親及阿榮伯的性格。
+        </li>
 
-<h2>重要人物分析</h2>
+        <li>
+          <strong>長大離鄉：</strong>
+          隨著年齡增長與離家求學，雨天不再只有快樂，也逐漸帶有寂寞與思念。
+        </li>
 
-<h3>母親</h3>
+        <li>
+          <strong>雨中懷念：</strong>
+          熟悉的雨聲與笛聲喚起童年及故鄉記憶，使文章留下綿長餘韻。
+        </li>
+      </ol>
 
-<ul>
-<li>慈悲善良</li>
-<li>富有同情心</li>
-<li>情感豐富</li>
-<li>樂於幫助他人</li>
-</ul>
+      <div class="important">
+        <strong>情感轉變：</strong>
+        童年雨天的歡樂與溫暖 → 長大離鄉後的淒涼與寂寞 → 對家人及故鄉的深切懷念。
+      </div>
+    </section>
 
-<h3>父親</h3>
+    <section class="card">
+      <h2>三、人物形象</h2>
 
-<ul>
-<li>悠閒賞雨</li>
-<li>喜愛花木</li>
-<li>具生活情趣</li>
-</ul>
+      <table>
+        <thead>
+          <tr>
+            <th>人物</th>
+            <th>具體表現</th>
+            <th>性格特質</th>
+          </tr>
+        </thead>
 
-<h3>阿榮伯</h3>
+        <tbody>
+          <tr>
+            <td>母親</td>
+            <td>
+              耐心為作者說故事，聽說唱故事時自然流露情感，也會照顧及幫助需要幫助的人。
+            </td>
+            <td>
+              慈愛、善良、仁厚、富有同情心、感情豐富。
+            </td>
+          </tr>
 
-<ul>
-<li>慈祥親切</li>
-<li>疼愛孩子</li>
-</ul>
+          <tr>
+            <td>父親</td>
+            <td>
+              雨天品茶、賞雨，也引導作者欣賞院中的花木。
+            </td>
+            <td>
+              從容、雅致、具有生活情趣。
+            </td>
+          </tr>
 
-</div>
+          <tr>
+            <td>阿榮伯</td>
+            <td>
+              讓年幼的作者坐在懷裡，照顧並疼愛作者。
+            </td>
+            <td>
+              慈祥、親切、疼愛孩子。
+            </td>
+          </tr>
 
-<div class="card">
+          <tr>
+            <td>童年的作者</td>
+            <td>
+              喜歡雨天活動，享受家人陪伴，對生活中的事物充滿好奇。
+            </td>
+            <td>
+              天真、活潑、富有童心。
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-<h2>歷屆常考重點</h2>
+      <div class="important">
+        <strong>考試技巧：</strong>
+        遇到人物性格題時，要根據人物的具體言行判斷，不要只憑自己的感覺作答。
+      </div>
+    </section>
 
-<ul>
-<li>作者是誰？</li>
-<li>母親的人物形象</li>
-<li>父親的人物形象</li>
-<li>文章中的鄉愁意象</li>
-<li>雨天帶來哪些快樂回憶？</li>
-<li>文章主旨與情感分析</li>
-</ul>
+    <section class="card">
+      <h2>四、下雨天為什麼「真好」？</h2>
 
-</div>
+      <ul class="review-list">
+        <li>雨天可以在院子裡玩耍，充滿童年樂趣。</li>
+        <li>雨天讓家人聚在一起，帶來陪伴與安全感。</li>
+        <li>作者可以聽母親說故事或聽說唱故事。</li>
+        <li>雨天中的食物、花木、聲音與人物形成鮮明記憶。</li>
+        <li>長大以後，雨天成為連結故鄉與童年的重要媒介。</li>
+      </ul>
 
-<div class="card">
+      <p>
+        因此，題目中的「好」不只是天氣本身的好，而是雨天承載了家庭親情、童年歡樂與故鄉記憶。
+      </p>
+    </section>
 
-<h2>常考修辭</h2>
+    <section class="card">
+      <h2>五、重要寫作手法</h2>
 
-<ul>
-<li>回憶法</li>
-<li>抒情法</li>
-<li>人物描寫</li>
-<li>景物描寫</li>
-</ul>
+      <table>
+        <thead>
+          <tr>
+            <th>寫作手法</th>
+            <th>作用</th>
+            <th>判斷重點</th>
+          </tr>
+        </thead>
 
-</div>
+        <tbody>
+          <tr>
+            <td>第一人稱</td>
+            <td>以「我」的親身回憶敘述，使內容具有真實感與親切感。</td>
+            <td>文章以作者自己的經驗為中心。</td>
+          </tr>
 
-<div class="card">
+          <tr>
+            <td>回憶敘事</td>
+            <td>由眼前的雨天聯想到過去的人物和事件。</td>
+            <td>注意現在與過去的切換。</td>
+          </tr>
 
-<h2>必背觀念</h2>
+          <tr>
+            <td>今昔對照</td>
+            <td>對照童年雨天的歡樂與成年雨天的寂寞。</td>
+            <td>分析前後情感差異。</td>
+          </tr>
 
-<p>
+          <tr>
+            <td>人物描寫</td>
+            <td>透過動作、言語及生活細節塑造人物性格。</td>
+            <td>由具體行為判斷性格。</td>
+          </tr>
 
-下雨天的「好」：
+          <tr>
+            <td>感官摹寫</td>
+            <td>運用雨聲、笛聲、食物及景物喚起回憶。</td>
+            <td>分辨視覺、聽覺、嗅覺與味覺。</td>
+          </tr>
 
-</p>
+          <tr>
+            <td>以小見大</td>
+            <td>從雨天的日常瑣事表現親情與鄉愁。</td>
+            <td>小事件背後具有較深的情感。</td>
+          </tr>
 
-<ol>
+          <tr>
+            <td>首尾呼應</td>
+            <td>前後都以雨天為重要線索，但情感由快樂轉為懷念。</td>
+            <td>比較開頭與結尾。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-<li>可以玩水</li>
+    <section class="card">
+      <h2>六、雨聲與笛聲的作用</h2>
 
-<li>可以聽鼓兒詞</li>
+      <h3>雨聲</h3>
 
-<li>可以和家人在一起</li>
+      <p>
+        雨聲是串聯全篇的重要線索。雨聲不只代表自然現象，也能喚起作者對童年生活、家人與故鄉的記憶。
+      </p>
 
-<li>充滿童年回憶</li>
+      <h3>笛聲</h3>
 
-</ol>
+      <p>
+        成年後聽見的笛聲，使作者聯想到過去的聲音與生活經驗。笛聲和雨聲相互交織，讓思鄉情感更加深遠。
+      </p>
 
-</div>
+      <div class="important">
+        <strong>結尾效果：</strong>
+        雨聲與笛聲使文章沒有直接結束，反而留下低沉、悠遠而綿延不絕的情感餘韻。
+      </div>
+    </section>
 
-<div class="card">
+    <section class="card">
+      <h2>七、重要字詞與文化常識</h2>
 
-<h2>自我測驗</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>字詞或項目</th>
+            <th>複習內容</th>
+          </tr>
+        </thead>
 
-<p>
-Q1：本課作者是誰？
-</p>
+        <tbody>
+          <tr>
+            <td>熹微</td>
+            <td>天色微明的樣子。「熹」讀作ㄒㄧ。</td>
+          </tr>
 
-<details>
-<summary>點我看答案</summary>
-琦君
-</details>
+          <tr>
+            <td>啟蒙</td>
+            <td>使初學者得到基本知識。</td>
+          </tr>
 
-<br>
+          <tr>
+            <td>幽幽</td>
+            <td>可形容聲音深遠、微弱，也可形容環境幽靜，須依文意判斷。</td>
+          </tr>
 
-<p>
-Q2：作者對母親的主要印象為何？
-</p>
+          <tr>
+            <td>魂牽夢縈</td>
+            <td>形容十分思念、牽掛。</td>
+          </tr>
 
-<details>
-<summary>點我看答案</summary>
-慈悲、善良、仁厚
-</details>
+          <tr>
+            <td>孺慕之情</td>
+            <td>子女對父母的敬愛與思慕。</td>
+          </tr>
 
-<br>
+          <tr>
+            <td>西子湖</td>
+            <td>指西湖。「西子」與古代人物西施的稱呼有關。</td>
+          </tr>
 
-<p>
-Q3：文章最後主要表達什麼情感？
-</p>
+          <tr>
+            <td>梅妻鶴子</td>
+            <td>與林逋隱居、愛梅養鶴的事蹟有關。</td>
+          </tr>
 
-<details>
-<summary>點我看答案</summary>
-思鄉與懷念童年
-</details>
+          <tr>
+            <td>鼓兒詞</td>
+            <td>傳統說唱文學的一種，是文章中重要的聲音與回憶線索。</td>
+          </tr>
 
-</div>
+          <tr>
+            <td>鄭元和學丐</td>
+            <td>與傳奇作品中的人物故事有關，是題庫常見的文學常識延伸題。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-</div>
+    <section class="card">
+      <h2>八、考古題高頻考點</h2>
 
-</body>
-</html>
+      <ol class="review-list">
+        <li>作者及文體特色。</li>
+        <li>母親、父親和阿榮伯的人物形象。</li>
+        <li>哪些生活細節能看出作者的童心童趣。</li>
+        <li>童年雨天為什麼讓作者覺得「真好」。</li>
+        <li>作者長大後為何產生淒涼、寂寞的感受。</li>
+        <li>雨聲與笛聲如何引發思鄉情緒。</li>
+        <li>童年與成年兩個階段的今昔對照。</li>
+        <li>第一人稱及回憶敘事的作用。</li>
+        <li>西湖、梅妻鶴子、放鶴亭及鼓兒詞等文化常識。</li>
+        <li>親情、童年回憶及故鄉意象的閱讀延伸題。</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>九、常見易錯觀念</h2>
+
+      <ul class="review-list">
+        <li>
+          母親感情豐富，並非冷漠、不善表達或不食人間煙火。
+        </li>
+
+        <li>
+          父親雨天品茶、賞景，表現的是生活情趣，不是好吃懶做。
+   
