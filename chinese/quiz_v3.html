@@ -172,23 +172,23 @@ function loadQuiz(){
 const quizDiv =
 document.getElementById("quiz");
 
+console.log(window.questionBank);
+
 if(
-typeof window.questionBank==="undefined"
+!window.questionBank
 ){
 
 quizDiv.innerHTML=
-
 `
 <div class="warning">
-
 ⚠️ 找不到 questions.js
-
 </div>
 `;
 
 return;
 
 }
+
 
 if(window.questionBank.length===0){
 
