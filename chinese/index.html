@@ -1,57 +1,743 @@
-<div class="card">
+<!DOCTYPE html>
+<html lang="zh-Hant">
 
-<h2>📚 學習單元</h2>
+<head>
+  <meta charset="UTF-8">
 
-<ul>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<li>
-<a href="lesson1.html">
-📖 第1課 田園之秋選
-</a>
-</li>
+  <title>JOSH 勛 國文搶救大作戰</title>
 
-<li>
-<a href="lesson2.html">
-📖 第2課 古詩選
-</a>
-</li>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<li>
-<a href="lesson3.html">
-📖 第3課 下雨天，真好
-</a>
-</li>
+    html {
+      scroll-behavior: smooth;
+    }
 
-<li>
-<a href="grammar.html">
-📚 語文常識（一）詞類
-</a>
-</li>
+    body {
+      margin: 0;
+      color: #263238;
+      background: #f3f6fa;
+      font-family:
+        "Microsoft JhengHei",
+        "Noto Sans TC",
+        sans-serif;
+      font-size: 18px;
+      line-height: 1.8;
+    }
 
-<li>
-<a href="exam1.html">
-📝 第一次段考總複習
-</a>
-</li>
+    /* 網站最上方標題 */
 
-<li>
-<a href="quiz_v3.html">
-🎯 第一次段考模擬考
-</a>
-</li>
+    header {
+      padding: 38p* 20px 32px;
+      color: white;
+  *   text-align: center;
+      backg*ound:
+        linear-gradient(
+   *      135deg,
+          #0d47a1,
+ *        #1976d2,
+          #42a5f5*        );
+      box-shadow: 0 4px*12px rgba(0, 0, 0, 0.18);
+    }
 
-<li>
-<a href="wrongbook.html">
-❌ 錯題本
-</a>
-</li>
+ *  .main-title {
+      margin: 0;
+ *    font-size: 42px;
+      line*height: *.3;
+      letter*spacing: 2px;
+    }
 
-<li>
-<a href="score.html">
-📊 歷史成績
-</a>
-</li>
+    .subtitle*{
+      margin* 12px 0 0;
+      font-size: 23px;
+*     font-weight* bold;
+    }
 
-</ul>
+    .*chool-year {
+      margin* 8*x 0 0;
+      font-size: 17px;
+*     opacity: 0.92;
+    }
 
-</div>
+    /* 快速導覽列 */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px;
+      background: white;
+      box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+      padding: 9px 15px;
+      color: #0d47a1;
+      background: #e3f2fd;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: white;
+      background: #1565c0;
+    }
+
+    /* 主要內容 */
+
+    .container {
+      max-width: 1120px;
+      margin: auto;
+      padding: 26px 20px 50px;
+    }
+
+    .welcome-card {
+      padding: 26px;
+      margin-bottom: 24px;
+      background: white;
+      border-left: 7px solid #1976d2;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.09);
+    }
+
+    .welcome-card h2 {
+      margin: 0 0 10px;
+      color: #0d47a1;
+      font-size: 29px;
+    }
+
+    .welcome-card p {
+      margin: 7px 0;
+    }
+
+    .section-title {
+      margin: 35px 0 18px;
+      color: #0d47a1;
+      font-size: 31px;
+      border-bottom: 4px solid #90caf9;
+      padding-bottom: 8px;
+    }
+
+    /* 段考區塊 */
+
+    .exam-section {
+      padding: 24px;
+      margin-bottom: 28px;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.09);
+    }
+
+    .exam-section.exam-one {
+      border-top: 7px solid #1976d2;
+    }
+
+    .exam-section.exam-two {
+      border-top: 7px solid #43a047;
+    }
+
+    .exam-section.exam-three {
+      border-top: 7px solid #ef6c00;
+    }
+
+    .exam-section h3 {
+      margin: 0 0 18px;
+      font-size: 27px;
+    }
+
+    .exam-one h3 {
+      color: #1565c0;
+    }
+
+    .exam-two h3 {
+      color: #2e7d32;
+    }
+
+    .exam-three h3 {
+      color: #e65100;
+    }
+
+    /* 課程卡片 */
+
+    .course-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .course-card {
+      position: relative;
+      min-height: 180px;
+      padding: 22px;
+      background: #fdfefe;
+      border: 1px solid #dde5ec;
+      border-radius: 13px;
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        border-color 0.2s;
+    }
+
+    .course-card.available:hover {
+      transform: translateY(-4px);
+      border-color: #42a5f5;
+      box-shadow: 0 7px 18px rgba(21, 101, 192, 0.18);
+    }
+
+    .course-card h4 {
+      margin: 0 0 10px;
+      color: #263238;
+      font-size: 23px;
+      line-height: 1.5;
+    }
+
+    .course-card p {
+      margin: 7px 0 15px;
+      color: #546e7a;
+      font-size: 17px;
+    }
+
+    .course-link {
+      display: inline-block;
+      padding: 9px 16px;
+      color: white;
+      background: #1565c0;
+      border-radius: 7px;
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .course-link:hover {
+      background: #0d47a1;
+    }
+
+    .status {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 4px 11px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .status.ready {
+      color: #1b5e20;
+      background: #e8f5e9;
+    }
+
+    .status.building {
+      color: #795548;
+      background: #fff3e0;
+    }
+
+    .course-card.pending {
+      color: #78909c;
+      background: #f7f8f9;
+      border-style: dashed;
+    }
+
+    .course-card.pending h4 {
+      color: #607d8b;
+    }
+
+    .pending-text {
+      display: inline-block;
+      padding: 8px 14px;
+      color: #795548;
+      background: #fff3e0;
+      border-radius: 7px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    /* 學習工具 */
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+
+    .tool-card {
+      padding: 24px;
+      background: white;
+      border-radius: 13px;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, 0.09);
+      text-align: center;
+    }
+
+    .tool-icon {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 42px;
+    }
+
+    .tool-card h3 {
+      margin: 8px 0;
+      font-size: 23px;
+    }
+
+    .tool-card p {
+      min-height: 58px;
+      margin: 6px 0 16px;
+      color: #607d8b;
+      font-size: 16px;
+    }
+
+    .tool-link {
+      display: block;
+      padding: 11px 15px;
+      color: white;
+      background: #455a64;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .tool-link:hover {
+      background: #263238;
+    }
+
+    .quiz-tool .tool-link {
+      background: #d32f2f;
+    }
+
+    .quiz-tool .tool-link:hover {
+      background: #b71c1c;
+    }
+
+    /* 每日複習提示 */
+
+    .daily-plan {
+      padding: 25px;
+      margin-top: 28px;
+      background: #fff8e1;
+      border-left: 7px solid #ffb300;
+      border-radius: 13px;
+      box-shadow: 0 3px 9px rgba(0,0,0,.08);
+    }
+
+    .daily-plan h2 {
+      margin-top: 0;
+      color: #e65100;
+      font-size: 27px;
+    }
+
+    .daily-plan ol {
+      margin-bottom: 0;
+    }
+
+    .daily-plan li {
+      margin-bottom: 7px;
+    }
+
+    footer {
+      padding: 24px 15px;
+      color: white;
+      background: #263238;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    /* 手機版 */
+
+    @media (max-width: 700px) {
+      body {
+        font-size: 17px;
+      }
+
+      .main-title {
+        font-size: 31px;
+      }
+
+      .subtitle {
+        font-size: 20px;
+      }
+
+      nav {
+        position: static;
+      }
+
+      nav a {
+        flex: 1 1 42%;
+        text-align: center;
+      }
+
+      .container {
+        padding: 18px 12px 35px;
+      }
+
+      .section-title {
+        font-size: 27px;
+      }
+
+      .exam-section {
+        padding: 18px;
+      }
+
+      .course-grid,
+      .tool-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .course-card {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1 class="main-title">
+      JOSH 勛 國文搶救大作戰
+    </h1>
+
+    <p class="subtitle">
+      📚 翰林國文八年級上學期學習中心
+    </p>
+
+    <p class="school-year">
+      課文重點、每日複習、單課測驗與段考模擬
+    </p>
+  </header>
+
+  <nav>
+    #exam1第一次段考</a>
+    #exam2第二次段考</a>
+    <axam3第三次段考</a>
+    <aools學習工具</a>
+    quiz_v3.html50題模擬考</a>
+  </nav>
+
+  <main class="container">
+
+    <section class="welcome-card">
+      <h2>👋 歡迎來到國文搶救中心</h2>
+
+      <p>
+        先閱讀每課的重點整理，再完成課末小測驗，
+        最後進行50題第一次段考模擬考。
+      </p>
+
+      <p>
+        已完成的課程顯示
+        <strong>「可以開始」</strong>；
+        後續課程先列出名稱，完成後即可啟用連結。
+      </p>
+    </section>
+
+    <h2 class="section-title" id="exam1">
+      📝 第一次段考課程
+    </h2>
+
+    <section class="exam-section exam-one">
+      <h3>第一次段考學習範圍</h3>
+
+      <div class="course-grid">
+
+        <article class="course-card available">
+          <span class="status ready">● 可以開始</span>
+
+          <h4>第1課 田園之秋選</h4>
+
+          <p>
+            西北雨順序、多感官摹寫、移覺、
+            生難字與高頻考點。
+          </p>
+
+          lesson1.html進入第1課</a>
+        </article>
+
+        <article class="course-card available">
+          <span class="status ready">● 可以開始</span>
+
+          <h4>第2課 古詩選</h4>
+
+          <p>
+            詩意理解、重要字詞、疊字、
+            古詩十九首與詩體比較。
+          </p>
+
+          <a class="course-link" href="lesson2.html">
+            進入第2課
+          </a>
+        </article>
+
+        <article class="course-card available">
+          <span class="status ready">● 可以開始</span>
+
+          <h4>第3課 下雨天，真好</h4>
+
+          <p>
+            人物形象、童年回憶、今昔對照、
+            親情與思鄉情感。
+          </p>
+
+          <a class="course-link" href="lesson3.html">
+            進入第3課
+          </a>
+        </article>
+
+        <article class="course-card available">
+          <span class="status ready">● 可以開始</span>
+
+          <h4>語文常識（一）詞類</h4>
+
+          <p>
+            名詞、動詞、形容詞、副詞、
+            聯綿詞與詞性判斷。
+          </p>
+
+          grammar.html進入語文常識</a>
+        </article>
+
+      </div>
+    </section>
+
+    <h2 class="section-title" id="exam2">
+      📗 第二次段考課程
+    </h2>
+
+    <section class="exam-section exam-two">
+      <h3>第二次段考學習範圍</h3>
+
+      <div class="course-grid">
+
+        <article class="course-card pending">
+          <span class="status building">建置中</span>
+
+          <h4>第4課 愛蓮說</h4>
+
+          <p>
+            文言字詞、語譯、托物言志、
+            君子品格與象徵手法。
+          </p>
+
+          <span class="pending-text">內容準備中</span>
+        </article>
+
+        <article class="course-card pending">
+          <span class="status building">建置中</span>
+
+          <h4>第5課 生命中的碎珠</h4>
+
+          <p>
+            課文主旨、設喻說理、人生體悟
+            與重要語詞。
+          </p>
+
+          <span class="pending-text">內容準備中</span>
+        </article>
+
+        <article class="course-card pending">
+          <span class="status building">建置中</span>
+
+          <h4>第6課 鳥</h4>
+
+          <p>
+            鳥類描寫、觀察角度、寫作特色
+            與作者感受。
+          </p>
+
+          <span class="pending-text">內容準備中</span>
+        </article>
+
+        <article class="course-card pending">
+          <span class="status building">建置中</span>
+
+          <h4>語文常識（二）句子</h4>
+
+          <p>
+            句子結構、句型判斷、語病辨識
+            與修正方法。
+          </p>
+
+          <span class="pending-text">內容準備中</span>
+        </article>
+
+      </div>
+    </section>
+
+    <h2 class="section-title" id="exam3">
+      📙 第三次段考課程
+    </h2>
+
+    <section class="exam-section exam-three">
+      <h3>第三次段考學習範圍</h3>
+
+      <div class="course-grid">
+
+        <article class="course-card pending">
+          <span class="status building">建置中</span>
+
+          <h4>第7課 張釋之執法</h4>
+
+          <p>
+            文言字詞、語譯、人物性格、
+            依法行政與公平正義。
+          </p>
+
+          <span class="pending-text">內容準備中</span>
+        </article>
+
+        <article class="course-card pending">
+          <span class="status building">建置中</span>
+
+          <h4>第8課 找尋失落的水源</h4>
+
+          <p>
+            水資源、環境議題、說明方法
+            與文本觀點。
+          </p>
+
+          <span class="pending-text">內容準備中</span>
+        </article>
+
+        <article class="course-card pending">
+          <span class="status building">建置中</span>
+
+          <h4>第9課 一棵開花的樹</h4>
+
+          <p>
+            新詩意象、象徵、情感發展
+            與詩句理解。
+          </p>
+
+          <span class="pending-text">內容準備中</span>
+        </article>
+
+        <article class="course-card pending">
+          <span class="status building">建置中</span>
+
+          <h4>第10課 畫的哀傷</h4>
+
+          <p>
+            故事情節、人物關係、主旨理解
+            與人文關懷。
+          </p>
+
+          <span class="pending-text">內容準備中</span>
+        </article>
+
+      </div>
+    </section>
+
+    <h2 class="section-title" id="tools">
+      🧰 段考與學習工具
+    </h2>
+
+    <section class="tool-grid">
+
+      <article class="tool-card">
+        <span class="tool-icon">📝</span>
+
+        <h3>第一次段考總複習</h3>
+
+        <p>
+          集中查看三課、語文常識與高頻考點。
+        </p>
+
+        <a class="tool-link" href="exam1.html">
+          開始總複習
+        </a>
+      </article>
+
+      <article class="tool-card quiz-tool">
+        <span class="tool-icon">🎯</span>
+
+        <h3>50題隨機模擬考</h3>
+
+        <p>
+          從現有題庫隨機抽題並自動批改。
+        </p>
+
+        quiz_v3.html
+          開始模擬考
+        </a>
+      </article>
+
+      <article class="tool-card">
+        <span class="tool-icon">❌</span>
+
+        <h3>我的錯題本</h3>
+
+        <p>
+          查看答錯題目、正確答案與解析。
+        </p>
+
+        <a class="tool-link" href="wrongbook.html">
+          查看錯題本
+        </a>
+      </article>
+
+      <article class="tool-card">
+        <span class="tool-icon">📊</span>
+
+        <h3>歷史成績</h3>
+
+        <p>
+          查看最新成績、最高分、平均分與紀錄。
+        </p>
+
+        <a class="tool-link" href="score.html">
+          查看成績
+        </a>
+      </article>
+
+    </section>
+
+    <section class="daily-plan">
+      <h2>⏰ 每天25分鐘搶救計畫</h2>
+
+      <ol>
+        <li>
+          <strong>5分鐘：</strong>
+          複習當課生難字與重要字義。
+        </li>
+
+        <li>
+          <strong>8分鐘：</strong>
+          閱讀一個課文重點或高頻考點。
+        </li>
+
+        <li>
+          <strong>7分鐘：</strong>
+          完成當課小測驗。
+        </li>
+
+        <li>
+          <strong>5分鐘：</strong>
+          查看錯題解析並重新記憶。
+        </li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    JOSH 勛 國文搶救大作戰
+    <br>
+    翰林國文八年級上學期學習網站
+  </footer>
+
+</body>
+
+</html>
