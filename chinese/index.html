@@ -35,35 +35,39 @@
     /* 網站最上方標題 */
 
     header {
-      padding: 38p* 20px 32px;
+      padding: 38px 20px 32px;
       color: white;
-  *   text-align: center;
-      backg*ound:
-        linear-gradient(
-   *      135deg,
-          #0d47a1,
- *        #1976d2,
-          #42a5f5*        );
-      box-shadow: 0 4px*12px rgba(0, 0, 0, 0.18);
+      text-align: center;
+      background-color: #1565c0;
+      background-image: linear-gradient(
+        135deg,
+        #0d47a1 0%,
+        #1565c0 50%,
+        #42a5f5 100%
+      );
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
     }
 
- *  .main-title {
+    .main-title {
       margin: 0;
- *    font-size: 42px;
-      line*height: *.3;
-      letter*spacing: 2px;
+      color: white;
+      font-size: 42px;
+      line-height: 1.3;
+      letter-spacing: 2px;
     }
 
-    .subtitle*{
-      margin* 12px 0 0;
+    .subtitle {
+      margin: 12px 0 0;
+      color: white;
       font-size: 23px;
-*     font-weight* bold;
+      font-weight: bold;
     }
 
-    .*chool-year {
-      margin* 8*x 0 0;
+    .school-year {
+      margin: 8px 0 0;
+      color: white;
       font-size: 17px;
-*     opacity: 0.92;
+      opacity: 0.95;
     }
 
     /* 快速導覽列 */
@@ -420,11 +424,11 @@
   </header>
 
   <nav>
-    #exam1第一次段考</a>
-    #exam2第二次段考</a>
-    <axam3第三次段考</a>
-    <aools學習工具</a>
-    quiz_v3.html50題模擬考</a>
+    <a href="#exam1">📝 第一次段考</a>
+    <a href="#exam2">📗 第二次段考</a>
+    <a href="#exam3">📙 第三次段考</a>
+    <a href="#tools">🧰 學習工具</a>
+    <a href="quiz_v3.html">🎯 50題模擬考</a>
   </nav>
 
   <main class="container">
@@ -463,7 +467,9 @@
             生難字與高頻考點。
           </p>
 
-          lesson1.html進入第1課</a>
+          <a class="course-link" href="lesson1.html">
+            進入第1課
+          </a>
         </article>
 
         <article class="course-card available">
@@ -506,7 +512,9 @@
             聯綿詞與詞性判斷。
           </p>
 
-          grammar.html進入語文常識</a>
+          <a class="course-link" href="grammar.html">
+            進入語文常識
+          </a>
         </article>
 
       </div>
@@ -669,7 +677,7 @@
           從現有題庫隨機抽題並自動批改。
         </p>
 
-        quiz_v3.html
+        <a class="tool-link" href="quiz_v3.html">
           開始模擬考
         </a>
       </article>
