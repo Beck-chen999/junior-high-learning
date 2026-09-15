@@ -1,272 +1,131 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>第一次段考總複習</title>
-
-<style>
-
-body{
-font-family:"Microsoft JhengHei";
-background:#f6f8fa;
-margin:0;
-}
-
-header{
-background:#d32f2f;
-color:white;
-padding:20px;
-text-align:center;
-}
-
-.container{
-max-width:1100px;
-margin:auto;
-padding:20px;
-}
-
-.card{
-background:white;
-padding:20px;
-margin-bottom:20px;
-border-radius:10px;
-box-shadow:0 2px 5px rgba(0,0,0,.1);
-}
-
-h2{
-color:#d32f2f;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-}
-
-th,td{
-border:1px solid #ddd;
-padding:10px;
-}
-
-th{
-background:#ffebee;
-}
-
-.highlight{
-background:#fff3cd;
-padding:10px;
-border-left:5px solid orange;
-}
-
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第一次段考總複習｜JOSH 勛 國文搶救大作戰</title>
+  <style>
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;background:#f3f6fa;color:#263238;font-family:"Microsoft JhengHei","Noto Sans TC",sans-serif;font-size:18px;line-height:1.8}
+    header{padding:34px 20px;color:white;text-align:center;background:linear-gradient(135deg,#b71c1c,#d32f2f,#ef5350)}
+    header h1{margin:0 0 8px;font-size:38px} header p{margin:5px 0}
+    nav{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:12px;background:white;box-shadow:0 2px 7px rgba(0,0,0,.1)}
+    nav a{padding:8px 13px;color:#b71c1c;background:#ffebee;border-radius:8px;text-decoration:none;font-weight:bold}
+    nav a:hover{color:white;background:#c62828}
+    .container{max-width:1080px;margin:auto;padding:24px 18px 48px}
+    .card{margin-bottom:22px;padding:24px;background:white;border-radius:14px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+    h2{margin-top:0;color:#b71c1c;font-size:29px;border-bottom:3px solid #ffcdd2;padding-bottom:7px}
+    h3{color:#37474f;font-size:23px}.lead{font-size:20px}
+    .notice{padding:16px;background:#fff8e1;border-left:6px solid #ffb300;border-radius:8px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}
+    .unit{padding:18px;background:#fafafa;border:1px solid #e0e0e0;border-radius:10px}.unit h3{margin-top:0}
+    .badge{display:inline-block;padding:3px 10px;border-radius:20px;background:#ffebee;color:#b71c1c;font-size:14px;font-weight:bold}
+    table{width:100%;border-collapse:collapse}th,td{padding:11px;border:1px solid #cfd8dc;text-align:left;vertical-align:top}th{background:#ffebee}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center}.flow div{padding:14px;background:#e3f2fd;color:#0d47a1;border-radius:8px;font-weight:bold}
+    .memory{background:#e8f5e9;border-left:6px solid #43a047;padding:15px;border-radius:8px}
+    .warning{background:#fff3e0;border-left:6px solid #fb8c00;padding:15px;border-radius:8px}
+    .check-item{display:block;margin:8px 0;padding:10px;background:#f7f9fb;border-radius:7px;cursor:pointer}.check-item input{margin-right:8px}
+    .progress{height:20px;background:#eceff1;border-radius:10px;overflow:hidden}.progress-fill{height:100%;width:0;background:#43a047;transition:.3s}
+    .actions{display:flex;flex-wrap:wrap;gap:12px}.btn{display:inline-block;padding:11px 18px;color:white;background:#c62828;border-radius:7px;text-decoration:none;font-weight:bold}.btn.secondary{background:#455a64}.btn:hover{filter:brightness(.9)}
+    details{margin:10px 0;padding:12px;background:#f8f9fa;border-radius:8px}summary{cursor:pointer;font-weight:bold;color:#b71c1c}
+    footer{text-align:center;padding:22px;background:#263238;color:white;font-size:15px}
+    @media(max-width:700px){body{font-size:17px}header h1{font-size:29px}.container{padding:14px 10px}.card{padding:17px}.flow{grid-template-columns:1fr 1fr}nav{position:static}.actions .btn{width:100%;text-align:center}}
+  </style>
 </head>
-
 <body>
-
 <header>
-
-<h1>📝 第一次段考總複習</h1>
-
-<p>翰林國文八上重點整理</p>
-
+  <h1>📝 第一次段考總複習</h1>
+  <p>JOSH 勛 國文搶救大作戰</p>
+  <p>第1課、第2課、第3課、語文常識（一）</p>
 </header>
-
-<div class="container">
-
-<div class="card">
-
-<h2>📊 出題率分析</h2>
-
-<table>
-
-<tr>
-<th>單元</th>
-<th>出題率</th>
-</tr>
-
-<tr>
-<td>田園之秋選</td>
-<td>30%</td>
-</tr>
-
-<tr>
-<td>古詩選</td>
-<td>25%</td>
-</tr>
-
-<tr>
-<td>下雨天，真好</td>
-<td>20%</td>
-</tr>
-
-<tr>
-<td>詞類</td>
-<td>10%</td>
-</tr>
-
-<tr>
-<td>閱讀測驗</td>
-<td>10%</td>
-</tr>
-
-<tr>
-<td>成語</td>
-<td>5%</td>
-</tr>
-
-</table>
-
-</div>
-
-<div class="card">
-
-<h2>🔥 第1課必考重點</h2>
-
-<ul>
-
-<li>西北雨順序</li>
-<li>烏雲 → 雷電 → 大雨 → 天晴</li>
-<li>摹寫法</li>
-<li>移覺修辭</li>
-<li>田園交響曲象徵雨過天青</li>
-
-</ul>
-
-</div>
-
-<div class="card">
-
-<h2>📖 第2課必考重點</h2>
-
-<p><b>必背課文</b></p>
-
-<p>
-
-纖纖擢素手<br>
-札札弄機杼<br><br>
-
-終日不成章<br>
-泣涕零如雨<br><br>
-
-盈盈一水間<br>
-脈脈不得語
-
-</p>
-
-<ul>
-
-<li>牛郎織女故事</li>
-
-<li>古詩十九首</li>
-
-<li>五言古詩</li>
-
-<li>相思主題</li>
-
-</ul>
-
-</div>
-
-<div class="card">
-
-<h2>☔ 第3課必考重點</h2>
-
-<ul>
-
-<li>作者：琦君</li>
-
-<li>母親形象：慈悲、善良、仁厚</li>
-
-<li>父親形象：賞雨、愛花木</li>
-
-<li>童年回憶</li>
-
-<li>鄉愁情感</li>
-
-</ul>
-
-</div>
-
-<div class="card">
-
-<h2>📚 詞類重點</h2>
-
-<table>
-
-<tr>
-<th>詞類</th>
-<th>例子</th>
-</tr>
-
-<tr>
-<td>名詞</td>
-<td>老師、書本</td>
-</tr>
-
-<tr>
-<td>動詞</td>
-<td>跑、跳</td>
-</tr>
-
-<tr>
-<td>形容詞</td>
-<td>美麗、高大</td>
-</tr>
-
-<tr>
-<td>副詞</td>
-<td>非常、已經</td>
-</tr>
-
-</table>
-
-</div>
-
-<div class="card">
-
-<h2>✏️ 高頻生難字</h2>
-
-<ul>
-
-<li>攫 ㄐㄩㄝˊ</li>
-<li>懾 ㄓㄜˊ</li>
-<li>霎 ㄕㄚˋ</li>
-<li>熹 ㄒㄧ</li>
-<li>麴 ㄑㄩˊ</li>
-<li>宿 ㄒㄧㄡˋ</li>
-<li>擢 ㄓㄨㄛˊ</li>
-<li>脈 ㄇㄛˋ</li>
-
-</ul>
-
-</div>
-
-<div class="card">
-
-<h2>🏆 常考成語</h2>
-
-<ul>
-
-<li>反哺</li>
-<li>羔羊跪乳</li>
-<li>寸草春暉</li>
-<li>春風化雨</li>
-<li>未雨綢繆</li>
-
-</ul>
-
-</div>
-
-<div class="card">
-
-<h2>✅ 自我檢查</h2>
-
-<p>我是否已會：</p>
-
-<input type="checkbox"> 西北雨順序<br>
-<input type="checkbox"> 摹寫法<br>
-<input type="checkbox"> 移覺修辭<br>
-<input type="
+<nav>
+  <a href="index.html">🏠 國文首頁</a>
+  <a href="#lesson1">第1課</a><a href="#lesson2">第2課</a><a href="#lesson3">第3課</a>
+  <a href="#grammar">語文常識</a><a href="#must">必背總表</a><a href="#plan">考前計畫</a>
+  <a href="quiz_v3.html">🎯 50題模擬考</a>
+</nav>
+<main class="container">
+<section class="card">
+  <h2>一、這次段考要準備什麼？</h2>
+  <p class="lead">複習重點不是只背課文，而是要能回答「字詞是什麼意思、文章如何安排、作者想表達什麼、用了哪些寫作手法」。</p>
+  <div class="grid">
+    <div class="unit"><span class="badge">第1課</span><h3>田園之秋選</h3><p>西北雨順序、摹寫、移覺、動態描寫、雨後情境。</p></div>
+    <div class="unit"><span class="badge">第2課</span><h3>古詩選</h3><p>詩意、字義、疊字、古詩十九首、古體詩與近體詩。</p></div>
+    <div class="unit"><span class="badge">第3課</span><h3>下雨天，真好</h3><p>人物形象、童年回憶、今昔對照、親情與鄉愁。</p></div>
+    <div class="unit"><span class="badge">語文常識</span><h3>詞類</h3><p>名詞、動詞、形容詞、副詞、代名詞、聯綿詞與疊字詞。</p></div>
+  </div>
+</section>
+<section class="card" id="lesson1">
+  <h2>二、第1課〈田園之秋選〉</h2>
+  <h3>核心主旨</h3><p>作者把西北雨發生的過程寫得像一齣戲劇，透過多感官與動態描寫，呈現大自然迅速、猛烈又充滿變化的力量。</p>
+  <h3>西北雨發展順序</h3><div class="flow"><div>烏雲密布</div><div>雷電交加</div><div>大雨滂沱</div><div>雨過天青</div></div>
+  <h3>必考寫作手法</h3>
+  <table><tr><th>手法</th><th>判斷方式</th><th>複習重點</th></tr>
+  <tr><td>視覺摹寫</td><td>顏色、形狀、明暗、景物變化</td><td>烏雲、閃電、雨後色彩</td></tr>
+  <tr><td>聽覺摹寫</td><td>雷聲、雨聲或狀聲詞</td><td>聲音使畫面更有臨場感</td></tr>
+  <tr><td>擬人</td><td>自然景物具有人的動作或意志</td><td>強化烏雲與雷電的威勢</td></tr>
+  <tr><td>譬喻</td><td>以具體形象描寫自然現象</td><td>先找本體、喻體與相似點</td></tr>
+  <tr><td>移覺</td><td>以一種感官表現另一種感官</td><td>用音樂感受表現雨後明亮景象</td></tr></table>
+  <h3>高頻字詞</h3><p><strong>攫</strong> ㄐㄩㄝˊ：抓取。　<strong>霎時</strong>：極短時間。　<strong>震懾</strong>：因威勢而恐懼。　<strong>滂沱</strong>：雨勢很大。　<strong>肆虐</strong>：任意侵害破壞。　<strong>行潦</strong>：道路積水。　<strong>氣脫委頓</strong>：失神無力、疲乏困頓。</p>
+  <div class="warning"><strong>常見陷阱：</strong>移覺不等於一般譬喻；文章重點不只是下雨，而是雨勢發展的戲劇性與氣氛轉換。</div>
+</section>
+<section class="card" id="lesson2">
+  <h2>三、第2課〈古詩選〉</h2>
+  <h3>詩意發展</h3><p>由牽牛、織女引出人物，描寫織女織布及情緒轉折，最後以銀河阻隔與含情無語呈現離愁相思。</p>
+  <h3>重要字詞</h3>
+  <table><tr><th>字詞</th><th>解釋</th><th>易錯提醒</th></tr>
+  <tr><td>迢迢</td><td>遙遠的樣子</td><td>疊字</td></tr><tr><td>纖纖</td><td>細長柔美的樣子</td><td>描寫手部形象</td></tr>
+  <tr><td>擢</td><td>舉起、伸出</td><td>讀ㄓㄨㄛˊ</td></tr><tr><td>機杼</td><td>織布機與織布工具</td><td>杼讀ㄓㄨˋ</td></tr>
+  <tr><td>章</td><td>織布形成的花紋</td><td>不是文章、章節</td></tr><tr><td>涕</td><td>眼淚</td><td>依古義判斷</td></tr>
+  <tr><td>盈盈</td><td>水清淺的樣子</td><td>不要只解為美好</td></tr><tr><td>脈脈</td><td>含情凝視的樣子</td><td>讀ㄇㄛˋ ㄇㄛˋ</td></tr></table>
+  <h3>《古詩十九首》必背</h3><ul><li>大致產生於東漢末年，作者多不可考。</li><li>後由蕭統編入《昭明文選》，蕭統是編選者，不是詩作作者。</li><li>各詩多以首句為篇名，是五言古詩成熟的重要代表。</li><li>常見主題包括離愁、遊子思鄉、人生無常與社會動亂。</li></ul>
+  <h3>古體詩與近體詩</h3><table><tr><th>項目</th><th>古體詩</th><th>近體詩</th></tr><tr><td>形式</td><td>句數、平仄較自由</td><td>講究格律、平仄</td></tr><tr><td>押韻</td><td>可換韻</td><td>通常一韻到底</td></tr><tr><td>對仗</td><td>無嚴格規定</td><td>律詩頷聯、頸聯通常須對仗</td></tr><tr><td>代表時期</td><td>漢、魏、六朝</td><td>唐代</td></tr></table>
+  <div class="warning"><strong>常見陷阱：</strong>織女不是不會織布，而是因相思悲傷而無心完成；銀河看似清淺，卻象徵無法跨越的阻隔。</div>
+</section>
+<section class="card" id="lesson3">
+  <h2>四、第3課〈下雨天，真好〉</h2>
+  <h3>核心主旨與情感轉變</h3><p>作者以雨天串聯童年生活、家庭人物與離鄉後的記憶，情感由童年的歡樂溫暖，逐漸轉為成年後的淒涼寂寞與思鄉。</p>
+  <h3>人物形象</h3><table><tr><th>人物</th><th>性格</th><th>判斷依據</th></tr><tr><td>母親</td><td>慈愛、仁厚、富同情心、情感豐富</td><td>說故事、聽鼓兒詞、幫助需要幫助的人</td></tr><tr><td>父親</td><td>從容、雅致、有生活情趣</td><td>品茶、賞雨、欣賞花木</td></tr><tr><td>阿榮伯</td><td>慈祥、親切、疼愛孩子</td><td>照顧年幼作者的生活細節</td></tr><tr><td>童年作者</td><td>天真、活潑、富有童心</td><td>喜歡雨天活動及家人陪伴</td></tr></table>
+  <h3>重要手法</h3><ul><li><strong>第一人稱：</strong>增加真實感與親切感。</li><li><strong>回憶敘事：</strong>由雨天引出過去的人物與事件。</li><li><strong>今昔對照：</strong>童年雨天歡樂對照成年後的寂寞。</li><li><strong>人物描寫：</strong>由動作、語言、生活細節塑造性格。</li><li><strong>首尾呼應：</strong>前後都寫雨天，但情感已產生變化。</li></ul>
+  <h3>高頻字詞與常識</h3><p><strong>熹微</strong>：天色微明。　<strong>啟蒙</strong>：使初學者獲得基本知識。　<strong>幽幽</strong>：依語境指深遠、微弱或幽靜。　<strong>魂牽夢縈</strong>：十分思念牽掛。　<strong>孺慕之情</strong>：子女對父母的敬愛思慕。　<strong>梅妻鶴子</strong>：與林逋愛梅養鶴的事蹟有關。</p>
+  <div class="warning"><strong>常見陷阱：</strong>母親是情感豐富，不是情感內斂；父親賞雨代表生活情趣，不是懶惰；全文結尾不只有快樂，也有明顯鄉愁。</div>
+</section>
+<section class="card" id="grammar">
+  <h2>五、語文常識（一）詞類</h2>
+  <table><tr><th>詞類</th><th>功能</th><th>例子</th></tr><tr><td>名詞</td><td>表示人、事、時、地、物</td><td>老師、雨天、故鄉</td></tr><tr><td>動詞</td><td>表示動作、行為或變化</td><td>閱讀、奔跑、思念</td></tr><tr><td>形容詞</td><td>表示性質或狀態</td><td>美麗、勇敢、清新</td></tr><tr><td>副詞</td><td>修飾動詞或形容詞</td><td>很、非常、已經、仍然</td></tr><tr><td>代名詞</td><td>代替人或事物名稱</td><td>我、你、他、這、那</td></tr></table>
+  <h3>聯綿詞與疊字詞</h3><ul><li><strong>聯綿詞：</strong>兩字不可分開解釋，如葡萄、琵琶、蜻蜓、躊躇、匍匐。</li><li><strong>疊字詞：</strong>相同音節重疊，如迢迢、纖纖、盈盈、脈脈。</li><li><strong>詞性活用：</strong>同一詞語在不同句子中可能因功能改變而具有不同詞性。</li></ul>
+  <div class="notice"><strong>判斷技巧：</strong>不要只背單字的固定詞性，要把詞放回句子，觀察它在句中扮演的功能。</div>
+</section>
+<section class="card" id="must">
+  <h2>六、考前必背總表</h2>
+  <div class="grid">
+    <div class="unit"><h3>字音字義</h3><p>攫、懾、霎、虐、滂沱、擢、杼、涕、脈脈、熹微、啟蒙。</p></div>
+    <div class="unit"><h3>修辭寫法</h3><p>摹寫、移覺、擬人、譬喻、疊字、今昔對照、人物描寫。</p></div>
+    <div class="unit"><h3>國學常識</h3><p>《古詩十九首》、《昭明文選》、古體詩與近體詩、七夕、梅妻鶴子。</p></div>
+    <div class="unit"><h3>成語主題</h3><p>寸草春暉、慈烏反哺、羔羊跪乳、春風化雨、敝帚自珍、司空見慣。</p></div>
+  </div>
+  <h3>自我檢查</h3>
+  <label class="check-item"><input type="checkbox" class="review-check">我能說出西北雨的四個階段。</label>
+  <label class="check-item"><input type="checkbox" class="review-check">我能分辨摹寫、譬喻與移覺。</label>
+  <label class="check-item"><input type="checkbox" class="review-check">我會解釋古詩的重要字詞。</label>
+  <label class="check-item"><input type="checkbox" class="review-check">我能比較古體詩與近體詩。</label>
+  <label class="check-item"><input type="checkbox" class="review-check">我能由言行判斷第三課人物性格。</label>
+  <label class="check-item"><input type="checkbox" class="review-check">我能在句子中判斷詞性。</label>
+  <p id="progressText"><strong>完成度：0%</strong></p><div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+</section>
+<section class="card" id="plan">
+  <h2>七、考前五天複習計畫</h2>
+  <table><tr><th>日期</th><th>複習內容</th><th>練習</th></tr><tr><td>第1天</td><td>第1課順序、修辭、字詞</td><td>第一課小測驗</td></tr><tr><td>第2天</td><td>第2課詩意、字義、文學常識</td><td>第二課小測驗</td></tr><tr><td>第3天</td><td>第3課人物、手法、情感轉變</td><td>第三課小測驗</td></tr><tr><td>第4天</td><td>詞類、聯綿詞、疊字、成語</td><td>語文常識練習</td></tr><tr><td>第5天</td><td>必背總表與錯題本</td><td>50題完整模擬考</td></tr></table>
+</section>
+<section class="card">
+  <h2>八、開始練習</h2><div class="actions"><a class="btn" href="quiz_v3.html">🎯 開始50題模擬考</a><a class="btn secondary" href="wrongbook.html">❌ 查看錯題本</a><a class="btn secondary" href="score.html">📊 查看歷史成績</a><a class="btn secondary" href="index.html">🏠 返回國文首頁</a></div>
+</section>
+</main>
+<footer>JOSH 勛 國文搶救大作戰｜第一次段考總複習</footer>
+<script>
+const key="exam1ReviewChecklist";const checks=document.querySelectorAll(".review-check");let saved=[];try{saved=JSON.parse(localStorage.getItem(key)||"[]")}catch(e){saved=[]}
+checks.forEach((c,i)=>{c.checked=Boolean(saved[i]);c.addEventListener("change",()=>{localStorage.setItem(key,JSON.stringify(Array.from(checks).map(x=>x.checked)));updateProgress()})});
+function updateProgress(){const done=Array.from(checks).filter(x=>x.checked).length;const percent=Math.round(done/checks.length*100);document.getElementById("progressText").innerHTML="<strong>完成度："+percent+"%</strong>";document.getElementById("progressFill").style.width=percent+"%"}updateProgress();
+</script>
+</body>
+</html>
