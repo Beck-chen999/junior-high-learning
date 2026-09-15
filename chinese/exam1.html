@@ -30,6 +30,19 @@
     details{margin:10px 0;padding:12px;background:#f8f9fa;border-radius:8px}summary{cursor:pointer;font-weight:bold;color:#b71c1c}
     footer{text-align:center;padding:22px;background:#263238;color:white;font-size:15px}
     @media(max-width:700px){body{font-size:17px}header h1{font-size:29px}.container{padding:14px 10px}.card{padding:17px}.flow{grid-template-columns:1fr 1fr}nav{position:static}.actions .btn{width:100%;text-align:center}}
+
+    /* 互動式測驗 */
+    .quiz-question{margin:16px 0;padding:18px;background:#f8fbff;border:1px solid #dbeafe;border-radius:10px}
+    .quiz-question h3{margin-top:0;color:#263238}
+    .quiz-option{display:block;margin:8px 0;padding:10px 12px;background:white;border:1px solid #dfe5eb;border-radius:7px;cursor:pointer}
+    .quiz-option:hover{background:#e3f2fd;border-color:#64b5f6}
+    .quiz-option input{margin-right:8px}
+    .quiz-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .quiz-button{padding:11px 18px;color:white;background:#c62828;border:0;border-radius:7px;cursor:pointer;font-size:16px;font-weight:bold}
+    .quiz-button.secondary{background:#546e7a}.quiz-button:disabled{background:#b0bec5;cursor:not-allowed}
+    .quiz-summary{margin-top:20px;padding:18px;background:#e8f5e9;border-left:6px solid #43a047;border-radius:8px}
+    .quiz-review{margin-top:14px;padding:15px;background:#fff3f3;border-left:6px solid #e53935;border-radius:8px}
+    .quiz-unanswered{border:2px solid #ff9800}
   </style>
 </head>
 <body>
@@ -117,8 +130,20 @@
   <h2>七、考前五天複習計畫</h2>
   <table><tr><th>日期</th><th>複習內容</th><th>練習</th></tr><tr><td>第1天</td><td>第1課順序、修辭、字詞</td><td>第一課小測驗</td></tr><tr><td>第2天</td><td>第2課詩意、字義、文學常識</td><td>第二課小測驗</td></tr><tr><td>第3天</td><td>第3課人物、手法、情感轉變</td><td>第三課小測驗</td></tr><tr><td>第4天</td><td>詞類、聯綿詞、疊字、成語</td><td>語文常識練習</td></tr><tr><td>第5天</td><td>必背總表與錯題本</td><td>50題完整模擬考</td></tr></table>
 </section>
+
+<section class="card" id="interactiveQuiz">
+  <h2>八、互動式重點測驗</h2>
+  <p>系統會從目前的第一次段考題庫隨機抽出10題，完成後立即顯示分數、正確答案與解析。</p>
+  <div class="notice" id="quizStatus">題庫載入中...</div>
+  <div id="reviewQuiz"></div>
+  <div class="quiz-buttons">
+    <button class="quiz-button" id="reviewSubmit" type="button" disabled>提交測驗</button>
+    <button class="quiz-button secondary" id="reviewRetry" type="button">重新抽題</button>
+  </div>
+  <div id="reviewResult"></div>
+</section>
 <section class="card">
-  <h2>八、開始練習</h2><div class="actions"><a class="btn" href="quiz_v3.html">🎯 開始50題模擬考</a><a class="btn secondary" href="wrongbook.html">❌ 查看錯題本</a><a class="btn secondary" href="score.html">📊 查看歷史成績</a><a class="btn secondary" href="index.html">🏠 返回國文首頁</a></div>
+  <h2>九、開始練習</h2><div class="actions"><a class="btn" href="quiz_v3.html">🎯 開始50題模擬考</a><a class="btn secondary" href="wrongbook.html">❌ 查看錯題本</a><a class="btn secondary" href="score.html">📊 查看歷史成績</a><a class="btn secondary" href="index.html">🏠 返回國文首頁</a></div>
 </section>
 </main>
 <footer>JOSH 勛 國文搶救大作戰｜第一次段考總複習</footer>
@@ -126,6 +151,90 @@
 const key="exam1ReviewChecklist";const checks=document.querySelectorAll(".review-check");let saved=[];try{saved=JSON.parse(localStorage.getItem(key)||"[]")}catch(e){saved=[]}
 checks.forEach((c,i)=>{c.checked=Boolean(saved[i]);c.addEventListener("change",()=>{localStorage.setItem(key,JSON.stringify(Array.from(checks).map(x=>x.checked)));updateProgress()})});
 function updateProgress(){const done=Array.from(checks).filter(x=>x.checked).length;const percent=Math.round(done/checks.length*100);document.getElementById("progressText").innerHTML="<strong>完成度："+percent+"%</strong>";document.getElementById("progressFill").style.width=percent+"%"}updateProgress();
+</script>
+
+<script src="./questions.js"></script>
+<script>
+(function(){
+  const COUNT=10;
+  let selectedQuestions=[];
+  let submitted=false;
+  const quiz=document.getElementById("reviewQuiz");
+  const status=document.getElementById("quizStatus");
+  const submit=document.getElementById("reviewSubmit");
+  const retry=document.getElementById("reviewRetry");
+  const result=document.getElementById("reviewResult");
+
+  function shuffle(items){
+    const copy=items.slice();
+    for(let i=copy.length-1;i>0;i--){
+      const j=Math.floor(Math.random()*(i+1));
+      [copy[i],copy[j]]=[copy[j],copy[i]];
+    }
+    return copy;
+  }
+
+  function load(){
+    result.innerHTML="";
+    submitted=false;
+    if(!Array.isArray(window.questionBank)||window.questionBank.length===0){
+      status.textContent="題庫載入失敗，請確認 questions.js 與 exam1.html 位於同一個 chinese 資料夾。";
+      submit.disabled=true;
+      return;
+    }
+    selectedQuestions=shuffle(window.questionBank).slice(0,Math.min(COUNT,window.questionBank.length));
+    quiz.innerHTML="";
+    selectedQuestions.forEach(function(q,index){
+      const block=document.createElement("div");
+      block.className="quiz-question";
+      block.id="review-question-"+index;
+      const title=document.createElement("h3");
+      title.textContent=(index+1)+". ["+(q.lesson||"未分類")+"] "+q.question;
+      block.appendChild(title);
+      q.options.forEach(function(option,optionIndex){
+        const label=document.createElement("label");
+        label.className="quiz-option";
+        const input=document.createElement("input");
+        input.type="radio"; input.name="review-q-"+index; input.value=String(optionIndex);
+        const text=document.createElement("span");
+        text.textContent=String.fromCharCode(65+optionIndex)+". "+option;
+        label.appendChild(input); label.appendChild(text); block.appendChild(label);
+      });
+      quiz.appendChild(block);
+    });
+    status.textContent="已從 "+window.questionBank.length+" 題中隨機抽出 "+selectedQuestions.length+" 題。";
+    submit.disabled=false; submit.textContent="提交測驗";
+  }
+
+  function grade(){
+    if(submitted||selectedQuestions.length===0)return;
+    let correct=0,unanswered=0,wrong=[];
+    selectedQuestions.forEach(function(q,index){
+      const block=document.getElementById("review-question-"+index);
+      block.classList.remove("quiz-unanswered");
+      const answer=document.querySelector('input[name="review-q-'+index+'"]:checked');
+      const chosen=answer?Number(answer.value):null;
+      if(chosen===null){unanswered++;block.classList.add("quiz-unanswered");}
+      if(chosen===q.answer){correct++;}
+      else{wrong.push({question:q.question,user:chosen===null?"未作答":q.options[chosen],correct:q.options[q.answer],explanation:q.explanation||"請複習相關單元。"});}
+    });
+    const percent=Math.round(correct/selectedQuestions.length*100);
+    let html='<div class="quiz-summary"><h2>成績：'+percent+' 分</h2><p>答對 '+correct+' / '+selectedQuestions.length+' 題，未作答 '+unanswered+' 題。</p></div>';
+    wrong.forEach(function(item,index){
+      html+='<div class="quiz-review"><strong>錯題 '+(index+1)+'：</strong>'+item.question+'<br><strong>你的答案：</strong>'+item.user+'<br><strong>正確答案：</strong>'+item.correct+'<br><strong>解析：</strong>'+item.explanation+'</div>';
+    });
+    if(wrong.length===0)html+='<div class="quiz-summary"><strong>🎉 全部答對！</strong></div>';
+    result.innerHTML=html;
+    submitted=true; submit.disabled=true; submit.textContent="已完成批改";
+    let history=[];try{history=JSON.parse(localStorage.getItem("exam1ReviewQuizHistory")||"[]")}catch(e){}
+    history.push({date:new Date().toLocaleString("zh-TW"),score:percent,correct:correct,total:selectedQuestions.length});
+    localStorage.setItem("exam1ReviewQuizHistory",JSON.stringify(history));
+  }
+
+  submit.addEventListener("click",grade);
+  retry.addEventListener("click",function(){if(confirm("確定重新抽題嗎？目前答案會清除。"))load();});
+  load();
+})();
 </script>
 </body>
 </html>
