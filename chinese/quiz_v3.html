@@ -211,7 +211,66 @@
       font-weight: bold;
     }
 
+    .student-card {
+      background: white;
+      border-left: 6px solid #1565c0;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      padding: 22px;
+    }
+
+    .student-card h2 {
+      color: #1565c0;
+      margin-top: 0;
+    }
+
+    .student-input-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    #studentName {
+      border: 2px solid #b0bec5;
+      border-radius: 7px;
+      flex: 1;
+      font-family: inherit;
+      font-size: 18px;
+      min-width: 220px;
+      padding: 12px 14px;
+    }
+
+    #studentName:focus {
+      border-color: #1565c0;
+      outline: none;
+    }
+
+    .name-confirmed {
+      color: #2e7d32;
+      font-weight: bold;
+    }
+
+    .name-error {
+      color: #c62828;
+      font-weight: bold;
+    }
+
+    .student-locked {
+      background: #e8f5e9;
+      border-left-color: #43a047;
+    }
+
     @media (max-width: 600px) {
+      .student-input-row {
+        flex-direction: column;
+      }
+
+      #studentName,
+      .name-button {
+        width: 100%;
+      }
+
       header h1 {
         font-size: 25px;
       }
@@ -314,6 +373,8 @@ class="name-button"
 
     let examQuestions = [];
     let quizSubmitted = false;
+    let currentStudentName = "";
+    let studentConfirmed = false;
 
     const MAX_QUESTION_COUNT = 50;
 
@@ -376,6 +437,46 @@ class="name-button"
       }
 
       return "";
+    }
+
+    // 姓名確認
+    function initializeStudentName() {
+      const nameInput = document.getElementById("studentName");
+      const confirmButton = document.getElementById("confirmNameButton");
+      const message = document.getElementById("studentMessage");
+      const savedName = localStorage.getItem("currentStudentName") || "";
+
+      if (savedName) {
+        nameInput.value = savedName;
+      }
+
+      confirmButton.addEventListener("click", function () {
+        const enteredName = nameInput.value.trim();
+
+        if (!enteredName) {
+          message.className = "name-error";
+          message.textContent = "⚠️ 請先輸入姓名。";
+          nameInput.focus();
+          return;
+        }
+
+        currentStudentName = enteredName;
+        studentConfirmed = true;
+        localStorage.setItem("currentStudentName", currentStudentName);
+
+        message.className = "name-confirmed";
+        message.textContent = "✅ 作答者：" + currentStudentName + "，可以開始測驗。";
+        document.getElementById("studentCard").classList.add("student-locked");
+        nameInput.disabled = true;
+        confirmButton.disabled = true;
+        confirmButton.textContent = "已確認姓名";
+
+        loadQuiz();
+        document.getElementById("quiz").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
     }
 
     // 載入並顯示題目
@@ -548,6 +649,15 @@ class="name-button"
 
     // 批改答案
     function checkAnswer() {
+      if (!studentConfirmed || !currentStudentName) {
+        alert("請先輸入並確認姓名。");
+        document.getElementById("studentCard").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+        return;
+      }
+
       if (
         !Array.isArray(examQuestions) ||
         examQuestions.length === 0
@@ -659,6 +769,9 @@ class="name-button"
             "<h2>📊 成績：" +
               percent +
               " 分</h2>" +
+            "<p><strong>作答者：</strong>" +
+              escapeHtml(currentStudentName) +
+            "</p>" +
             "<p>未作答：" +
               unansweredCount +
               " 題</p>" +
@@ -738,6 +851,8 @@ class="name-button"
       }
 
       scoreHistory.push({
+        studentName: currentStudentName,
+        source: "第一次段考50題模擬考",
         date:
           new Date().toLocaleString("zh-TW"),
         score: percent,
@@ -806,13 +921,21 @@ class="name-button"
         newQuizButton.addEventListener(
           "click",
           function () {
+            if (!studentConfirmed) {
+              alert("請先輸入並確認姓名。");
+              document.getElementById("studentCard").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+              });
+              return;
+            }
+
             const confirmed = window.confirm(
               "確定要重新抽題嗎？目前尚未提交的答案將會消失。"
             );
 
             if (confirmed) {
               loadQuiz();
-
               window.scrollTo({
                 top: 0,
                 behavior: "smooth"
@@ -821,13 +944,13 @@ class="name-button"
           }
         );
 
-        loadQuiz();
+        document.getElementById("quiz").innerHTML =
+          '<div class="warning">請先輸入姓名並按下「確認姓名並開始測驗」。</div>';
+        document.getElementById("progress").textContent = "等待輸入姓名";
+        initializeStudentName();
       }
     );
   </script>
-
-</body>
-</html>
 
 </body>
 </html>
