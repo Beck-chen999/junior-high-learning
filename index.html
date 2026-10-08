@@ -1,2 +1,228 @@
-網站建立成功
-GitHub Pages 測試中
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="JOSH 勛國中全科學習中心，整合國文、數學、英文、自然與社會科複習、模擬考、錯題本及成績紀錄。">
+  <title>JOSH 勛｜國中全科學習中心</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: #f4f7fb;
+      color: #263238;
+      font-family: "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+      line-height: 1.7;
+    }
+    header {
+      position: relative;
+      overflow: hidden;
+      padding: 68px 18px;
+      color: #fff;
+      text-align: center;
+      background: linear-gradient(135deg, #0d47a1, #1565c0 55%, #42a5f5);
+    }
+    header::before, header::after {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      content: "";
+    }
+    header::before { top: -120px; left: -80px; }
+    header::after { right: -90px; bottom: -140px; }
+    header h1 { position: relative; margin: 0; font-size: 44px; letter-spacing: 2px; }
+    header p { position: relative; margin: 12px 0 0; font-size: 19px; color: #e3f2fd; }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 2px 10px rgba(0,0,0,.12);
+      backdrop-filter: blur(8px);
+    }
+    nav a {
+      padding: 8px 13px;
+      color: #0d47a1;
+      border-radius: 8px;
+      background: #e3f2fd;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    main { max-width: 1180px; margin: auto; padding: 32px 16px 60px; }
+    .intro {
+      margin-bottom: 28px;
+      padding: 24px;
+      border-left: 7px solid #1976d2;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    }
+    .intro h2 { margin: 0 0 8px; }
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      align-items: stretch;
+    }
+    .subject {
+      --subject: #1565c0;
+      display: flex;
+      min-height: 310px;
+      padding: 24px;
+      border-top: 7px solid var(--subject);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 4px 15px rgba(38,50,56,.10);
+      flex-direction: column;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .subject:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 24px rgba(38,50,56,.16);
+    }
+    .subject-icon {
+      display: grid;
+      width: 58px;
+      height: 58px;
+      margin-bottom: 14px;
+      color: #fff;
+      border-radius: 16px;
+      background: var(--subject);
+      place-items: center;
+      font-size: 30px;
+    }
+    .subject h2 { margin: 0; font-size: 28px; }
+    .subject p { margin: 10px 0 18px; color: #546e7a; flex: 1; }
+    .status {
+      align-self: flex-start;
+      margin-bottom: 12px;
+      padding: 4px 10px;
+      color: #1b5e20;
+      border-radius: 20px;
+      background: #e8f5e9;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .status.building { color: #795548; background: #fff3e0; }
+    .enter {
+      align-self: stretch;
+      margin-top: auto;
+      padding: 11px 16px;
+      color: #fff;
+      border-radius: 9px;
+      background: var(--subject);
+      text-align: center;
+      text-decoration: none;
+      font-weight: 800;
+    }
+    .enter.disabled {
+      color: #607d8b;
+      background: #eceff1;
+      cursor: not-allowed;
+    }
+    .chinese { --subject: #c62828; }
+    .math { --subject: #7b1fa2; }
+    .english { --subject: #00897b; }
+    .science { --subject: #2e7d32; }
+    .social { --subject: #ef6c00; }
+    .url-box {
+      margin-top: 30px;
+      padding: 22px;
+      border-radius: 14px;
+      background: #263238;
+      color: #fff;
+    }
+    .url-box code { color: #b3e5fc; word-break: break-all; }
+    footer { padding: 24px; color: #cfd8dc; background: #263238; text-align: center; }
+    @media (max-width: 650px) {
+      header { padding: 45px 12px; }
+      header h1 { font-size: 31px; }
+      header p { font-size: 16px; }
+      nav { position: static; }
+      nav a { flex: 1 1 30%; text-align: center; }
+      main { padding: 18px 10px 40px; }
+      .subject-grid { grid-template-columns: 1fr; }
+      .subject { min-height: 270px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📚 JOSH 勛 國中全科學習中心</h1>
+    <p>課程複習・段考模擬・錯題解析・成績紀錄</p>
+  </header>
+
+  <nav aria-label="各科快速入口">
+    <a href="#chinese">國文</a>
+    <a href="#math">數學</a>
+    <a href="#english">英文</a>
+    <a href="#science">自然</a>
+    <a href="#social">社會</a>
+  </nav>
+
+  <main>
+    <section class="intro">
+      <h2>選擇學習科目</h2>
+      <p>目前國文與社會科已開放。其他科目的資料夾與首頁完成後，只要把卡片連結改成對應的 <code>科目/index.html</code> 即可啟用。</p>
+    </section>
+
+    <section class="subject-grid" aria-label="各科學習入口">
+      <article class="subject chinese" id="chinese">
+        <div class="subject-icon">文</div>
+        <span class="status">● 已開放</span>
+        <h2>國文</h2>
+        <p>翰林版八年級上學期課文重點、三次段考複習、50題模擬考、完整解析、錯題本與歷史成績。</p>
+        <a class="enter" href="chinese/index.html">進入國文學習中心</a>
+      </article>
+
+      <article class="subject math" id="math">
+        <div class="subject-icon">數</div>
+        <span class="status building">建置中</span>
+        <h2>數學</h2>
+        <p>單元觀念、公式整理、例題解析、計算練習、段考模擬與數學錯題本。</p>
+        <span class="enter disabled" aria-disabled="true">數學網站準備中</span>
+      </article>
+
+      <article class="subject english" id="english">
+        <div class="subject-icon">英</div>
+        <span class="status building">建置中</span>
+        <h2>英文</h2>
+        <p>課文、單字、文法、閱讀理解、聽力重點、段考模擬與英文錯題本。</p>
+        <span class="enter disabled" aria-disabled="true">英文網站準備中</span>
+      </article>
+
+      <article class="subject science" id="science">
+        <div class="subject-icon">理</div>
+        <span class="status building">建置中</span>
+        <h2>自然</h2>
+        <p>核心觀念、實驗判讀、公式應用、圖表分析、段考模擬與自然科錯題本。</p>
+        <span class="enter disabled" aria-disabled="true">自然網站準備中</span>
+      </article>
+
+      <article class="subject social" id="social">
+        <div class="subject-icon">社</div>
+        <span class="status">● 已開放</span>
+        <h2>社會</h2>
+        <p>翰林版八年級上學期地理、歷史、公民第一次段考複習、200題庫隨機模擬考、錯題本與成績。</p>
+        <a class="enter" href="social/index.html">進入社會科學習中心</a>
+      </article>
+    </section>
+
+    <section class="url-box">
+      <h2>網站發布位置</h2>
+      <p>將這個檔案放在 <code>junior-high-learning/index.html</code>，發布後的全科首頁為：</p>
+      <code>https://beck-chen999.github.io/junior-high-learning/</code>
+    </section>
+  </main>
+
+  <footer>JOSH 勛 國中全科學習中心</footer>
+</body>
+</html>
